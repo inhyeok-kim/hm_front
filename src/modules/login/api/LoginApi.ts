@@ -1,13 +1,19 @@
-import axios from "axios";
+import AxiosBuilder from "../../../axios/AxiosBuilder";
 
-const loginAxios = axios.create({
+
+const loginAxios = AxiosBuilder.getAxiosInstance({
     baseURL : import.meta.env.VITE_DEFAULT_API_SERVER+"/auth"
-})
+});
 
-export async function login(){
+export async function login(id: string, password : string){
     const result = await loginAxios.post("",{
-        id : 'test',
-        password : '1234'
+        loginId : id,
+        password : password
     });
-    console.log(result);
+    return result.data;
+}
+
+export async function loginCheck(){
+    const result = await loginAxios.get("");
+    return result.data;
 }
