@@ -1,8 +1,8 @@
 import { FormControl, TextField } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import LoginButton from "../fetures/LoginButton";
-import { useEffect, useState } from "react";
-import { loginCheck } from "../api/LoginApi";
+import { useState } from "react";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Link } from "react-router-dom";
 
 export default function LoginFormWidget(){
     const [id, setId] = useState('');
@@ -16,12 +16,19 @@ export default function LoginFormWidget(){
     }
 
     return (
-        <Grid2>
-            <FormControl>
-                <TextField label='ID' value={id} onChange={(e)=>{setId(e.currentTarget.value)}} />
-                <TextField label='PASSWORD' value={password} onChange={(e)=>{setPassword(e.currentTarget.value)}} />
-                <LoginButton id={id} password={password} onLoginFail={onLoginFail} onLoginSuccess={onLoginSuccess} />
+        <>
+            <FormControl
+                fullWidth
+            >
+                <TextField label='ID' value={id} onChange={(e)=>{setId(e.currentTarget.value)}} margin="dense" />
+                <TextField label='PASSWORD' value={password} onChange={(e)=>{setPassword(e.currentTarget.value)}} margin="dense" />
             </FormControl>
-        </Grid2>
+            <FormControl margin="dense" fullWidth>
+                <Grid2 container justifyContent={'space-between'}>
+                    <Link to={'/sign'}>회원가입</Link>
+                    <LoginButton id={id} password={password} onLoginFail={onLoginFail} onLoginSuccess={onLoginSuccess} />
+                </Grid2>
+            </FormControl>
+        </>
     )
 }

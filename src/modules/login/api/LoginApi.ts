@@ -1,4 +1,4 @@
-import AxiosBuilder from "../../../axios/AxiosBuilder";
+import AxiosBuilder from "../../../utils/axios/AxiosBuilder";
 
 
 const loginAxios = AxiosBuilder.getAxiosInstance({

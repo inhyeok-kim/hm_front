@@ -4,6 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { worker } from './mock/worker.ts'
+import { RecoilRoot } from 'recoil'
 
 
 if (import.meta.env.MODE === 'mock') {
@@ -13,7 +14,9 @@ if (import.meta.env.MODE === 'mock') {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter basename='/'>
-      <App />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
     </BrowserRouter>
   </React.StrictMode>,
 )
