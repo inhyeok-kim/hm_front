@@ -7,8 +7,10 @@ function getAxiosInstance(config?: CreateAxiosDefaults<any> | undefined){
         return response;
     }, (error)=>{
         if(error.response.data.code === -100){
-            alert("로그인이 필요합니다.");
-            location.href="/login";
+            if(!location.pathname.startsWith('/login')){
+                alert("로그인이 필요합니다.");
+                location.href="/login";
+            }
         }
         return Promise.reject(error);
     });
