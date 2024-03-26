@@ -15,9 +15,9 @@ export let loginUser : any = null;
 export const authHandlers = [
     http.get(baseURL, async ({request})=>{
         if(loginUser === null){
-            return HttpResponse.json({code : 0});
-        } else {
             return HttpResponse.json({code : -100, message : 'un Authenticated'}, {status : 400})
+        } else {
+            return HttpResponse.json({code : 0});
         }
     }),
     http.post(baseURL,async ({request})=>{
@@ -43,14 +43,14 @@ export const authHandlers = [
         const name = body.name;
         const password = body.password;
 
-        const auth = authDatas.push({
+        authDatas.push({
             id : 2,
             loginId : loginId,
             password : password
         });
         
         return HttpResponse.json({
-            code : -1
+            code : 0
         });
     })
 ]
