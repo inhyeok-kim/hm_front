@@ -10,7 +10,7 @@ export const authDatas = [
     }
 ]
 
-export let loginUser : any = null;
+let loginUser : any = authDatas[0];
 
 export const authHandlers = [
     http.get(baseURL, async ({request})=>{

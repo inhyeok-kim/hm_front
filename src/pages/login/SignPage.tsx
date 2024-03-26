@@ -1,5 +1,5 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import SignFormWidget from "../../modules/sign/widgets/LoginFormWidget";
+import SignFormWidget from "../../modules/sign/widgets/SignFormWidget";
 
 export default function SignPage(){
     return (

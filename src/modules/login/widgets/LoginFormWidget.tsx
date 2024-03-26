@@ -1,5 +1,5 @@
 import { FormControl, TextField, Typography } from "@mui/material";
-import LoginButton from "../fetures/LoginButton";
+import LoginButton from "../features/LoginButton";
 import { useState } from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Link, useNavigate } from "react-router-dom";
