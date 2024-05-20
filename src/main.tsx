@@ -4,6 +4,8 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { worker } from './mock/worker.ts'
 import { RecoilRoot } from 'recoil'
+import { ThemeProvider } from '@mui/material'
+import { theme } from './utils/color/theme.ts'
 
 
 if (import.meta.env.MODE === 'mock') {
@@ -13,7 +15,9 @@ if (import.meta.env.MODE === 'mock') {
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter basename='/'>
       <RecoilRoot>
-        <App />
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </RecoilRoot>
     </BrowserRouter>
 )

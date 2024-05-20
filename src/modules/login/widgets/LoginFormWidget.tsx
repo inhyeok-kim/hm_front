@@ -1,8 +1,9 @@
-import { FormControl, TextField, Typography } from "@mui/material";
+import { FormControl, Stack, TextField, Typography } from "@mui/material";
 import LoginButton from "../features/LoginButton";
 import { useState } from "react";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Link, useNavigate } from "react-router-dom";
+import { hmgreen } from "../../../utils/color/hmcolor";
 
 export default function LoginFormWidget(){
     const [id, setId] = useState('');
@@ -22,19 +23,45 @@ export default function LoginFormWidget(){
         <>
             <FormControl
                 fullWidth
+                sx={{marginBottom:5}}
             >
-                <TextField label='ID' value={id} onChange={(e)=>{setId(e.currentTarget.value)}} margin="dense" />
-                <TextField label='PASSWORD' type="password" value={password} onChange={(e)=>{setPassword(e.currentTarget.value)}} margin="dense" />
+                <TextField 
+                    InputProps={{disableUnderline : true, style:{borderRadius : '8px'}}}
+                    
+                    size="small" 
+                    label='Email' 
+                    variant="filled" 
+                    value={id} 
+                    onChange={(e)=>{setId(e.currentTarget.value)}} 
+                    margin="dense" />
+                <TextField 
+                    InputProps={{disableUnderline : true, style:{borderRadius : '8px'}}}
+                    size="small" 
+                    label='Password' 
+                    variant="filled" 
+                    type="password" 
+                    value={password} 
+                    onChange={(e)=>{setPassword(e.currentTarget.value)}} 
+                    margin="dense" />
                 {loginFailed?
                     <Typography variant="caption" color={"red"}>입력하신 정보와 일치하는 계정을 찾을 수 없습니다.</Typography>
                     :''
                 }
             </FormControl>
-            <FormControl margin="dense" fullWidth>
-                <Grid2 container justifyContent={'space-between'}>
-                    <Link to={'/sign'}>회원가입</Link>
-                    <LoginButton id={id} password={password} onLoginFail={onLoginFail} onLoginSuccess={onLoginSuccess} />
-                </Grid2>
+            <FormControl margin="normal" fullWidth>
+                <Stack spacing={2}>
+                    <LoginButton 
+                        id={id} 
+                        password={password} 
+                        onLoginFail={onLoginFail} 
+                        onLoginSuccess={onLoginSuccess}
+                     />
+                    <Link to={'/sign'}>
+                        <Typography textAlign={'center'} color={hmgreen}>
+                            Forgot your password?
+                        </Typography>
+                    </Link>
+                </Stack>
             </FormControl>
         </>
     )

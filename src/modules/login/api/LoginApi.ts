@@ -14,6 +14,6 @@ export async function login(id: string, password : string){
 }
 
 export async function loginCheck(){
-    const result = await loginAxios.get("");
+    const result = await loginAxios.get("/check");
     return result.data;
 }

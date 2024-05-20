@@ -18,6 +18,10 @@ export default function LoginButton(props : Props){
     }
 
     return (
-        <Button variant="contained" onClick={onClickHandler}>Login</Button>
+        <Button 
+            style={{borderRadius : '100px'}}
+            size="large"
+            variant="contained" 
+            onClick={onClickHandler}>Log in</Button>
     )
 }
