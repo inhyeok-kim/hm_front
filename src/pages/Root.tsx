@@ -44,6 +44,7 @@ function RootForMobile(){
                 width={'100%'}
                 height={'calc(100% - 61px)'}
                 paddingTop={3}
+                overflow={'auto'}
             >
                 <Outlet/>
             </Grid2>
@@ -170,6 +171,7 @@ function RootForTablet(){
             </Grid2>
             <Grid2
                 width={'calc(100% - 175px)'}
+                height={'100%'}
                 overflow={'auto'}
                 padding={2}
             >
