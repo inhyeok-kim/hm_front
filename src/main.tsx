@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { worker } from './mock/worker.ts'
 import { RecoilRoot } from 'recoil'
 import { ThemeProvider } from '@mui/material'
-import { theme } from './utils/color/theme.ts'
+import { theme } from './utils/style/theme.ts'
 
 
 if (import.meta.env.MODE === 'mock') {

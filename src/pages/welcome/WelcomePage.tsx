@@ -1,5 +1,5 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { color_green } from "../../utils/color/hmcolor";
+import { color_green } from "../../utils/style/hmstyle";
 import WelcomeWidget from "../../modules/welcome/widgets/WelcomeWidget";
 import { useDevice } from "../../utils/hooks/DeviceHooks";
 

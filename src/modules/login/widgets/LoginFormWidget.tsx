@@ -2,7 +2,7 @@ import { FormControl, Stack, TextField, Typography } from "@mui/material";
 import LoginButton from "../features/LoginButton";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { color_green } from "../../../utils/color/hmcolor";
+import { color_green } from "../../../utils/style/hmstyle";
 
 export default function LoginFormWidget(){
     const [id, setId] = useState('');

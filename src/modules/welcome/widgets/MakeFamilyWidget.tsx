@@ -1,6 +1,6 @@
 import { Button, FormControl, Stack, TextField, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { color_font_grey } from "../../../utils/color/hmcolor";
+import { color_font_grey } from "../../../utils/style/hmstyle";
 import { useRef } from "react";
 
 export default function MakeFamilyWidget({

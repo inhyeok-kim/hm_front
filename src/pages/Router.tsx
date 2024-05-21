@@ -4,11 +4,18 @@ import HomePage from "./home/HomePage";
 import SignPage from "./login/SignPage";
 import NonFamilyPage from "./family/NonFamilyPage";
 import WelcomePage from "./welcome/WelcomePage";
+import Root from "./Root";
+import ItemPage from "./item/ItemPage";
 
 export default function Router(){
     return (
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Root />}>
+          <Route path="/home" element={<HomePage/>} />
+          <Route path="/item" element={<ItemPage/>} />
+          <Route path="/recipe" element={<HomePage/>} />
+          <Route path="/menu" element={<HomePage/>} />
+        </Route>
         <Route path="login" element={<LoginPage />} />
         <Route path="sign" element={<SignPage />} />
         <Route path="welcome" element={<WelcomePage/>}/>
