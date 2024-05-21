@@ -2,6 +2,6 @@
   "short_name": "hmm",
   "name": "Create React App Sample",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#5DB075"
 }
