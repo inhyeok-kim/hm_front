@@ -59,7 +59,7 @@ function RootForMobile(){
                     showLabels
                     value={value} 
                     onChange={handleChange}
-                    sx={{height:'60px'}}
+                    sx={{height:'60px', background : '#FAFAFA'}}
                 >
                     <BottomNavigationAction
                         label="Home"
