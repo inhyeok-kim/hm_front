@@ -42,7 +42,7 @@ function RootForMobile(){
         >
             <Grid2
                 width={'100%'}
-                height={'calc(100% - 61px)'}
+                height={'calc(100% - 81px)'}
                 paddingTop={3}
                 overflow={'auto'}
             >
@@ -50,7 +50,7 @@ function RootForMobile(){
             </Grid2>
             <Grid2
                 width={'100%'}
-                height={'60px'}
+                height={'80px'}
                 paddingBottom={'10px'}
                 bgcolor={'#FAFAFA'}
                 borderTop={'1px solid #e3e3e3'}
@@ -59,7 +59,7 @@ function RootForMobile(){
                     showLabels
                     value={value} 
                     onChange={handleChange}
-                    sx={{height:'50px'}}
+                    sx={{height:'60px'}}
                 >
                     <BottomNavigationAction
                         label="Home"
