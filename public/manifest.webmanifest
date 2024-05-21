@@ -1,0 +1,10 @@
+{
+  "name": "스테이지",
+  "display": "fullscreen", 
+  "start_url": "/", 
+  "description": "description", 
+  "background_color": "white", 
+  "short_name": "short name", 
+  "theme_color": "#FFBC00", 
+  "orientation": "portrait" 
+}
