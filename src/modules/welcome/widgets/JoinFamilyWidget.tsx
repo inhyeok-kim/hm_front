@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { color_font_grey } from "../../../utils/style/hmstyle";
 import { grey } from "@mui/material/colors";
 import { useDevice } from "../../../utils/hooks/DeviceHooks";
+import { useNavigate } from "react-router-dom";
 
 export default function JoinFamilyWidget({
     onCancel
@@ -315,7 +316,7 @@ function ComfirmWidget({
 }
 
 function Congratulation(){
-
+    const navigate = useNavigate();
     return (
         <Stack
             height={'100%'}
@@ -336,6 +337,7 @@ function Congratulation(){
                         fullWidth 
                         variant="text"
                         style={{borderRadius : 100, textTransform : 'none'}}
+                        onClick={()=>{navigate('/home')}}
                     >I want to cancel the join request</Button>
                 </Stack>
             </Grid2>

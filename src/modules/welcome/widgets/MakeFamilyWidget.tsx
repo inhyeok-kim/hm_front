@@ -2,6 +2,7 @@ import { Button, FormControl, Stack, TextField, Typography } from "@mui/material
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { color_font_grey } from "../../../utils/style/hmstyle";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MakeFamilyWidget({
     onCancel
@@ -96,6 +97,7 @@ export default function MakeFamilyWidget({
 }
 
 function Congratulation(){
+    const navigate = useNavigate();
 
     return (
         <Stack
@@ -118,6 +120,7 @@ function Congratulation(){
                         fullWidth 
                         variant="contained"
                         style={{borderRadius : 100, textTransform : 'none'}}
+                        onClick={()=>{navigate('/home')}}
                     >Let's Go</Button>
                 </Stack>
             </Grid2>

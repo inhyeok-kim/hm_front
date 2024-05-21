@@ -28,7 +28,9 @@ export default function LoginPage(){
                     >
                         <Grid2 xs={3} textAlign={"left"}></Grid2>
                         <Grid2 xs={6}>
-                            <Typography textAlign={"center"} variant="h5" fontWeight={"bold"}>Log In</Typography>
+                            <Typography textAlign={"center"} variant="h5" fontWeight={"bold"}
+                                onClick={()=>{()=>{navigate('/home')}}}
+                            >Log In</Typography>
                         </Grid2>
                         <Grid2 xs={3} textAlign={"right"}>
                             <Button onClick={()=>{navigate("/sign")}} style={{textTransform : 'none'}} variant="text">Sign Up</Button>

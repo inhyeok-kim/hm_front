@@ -10,11 +10,11 @@ export default function SignFormWidget(){
 
     const navigate = useNavigate();
     async function onSign(){
-        const result = await sign(id,password,name);
-        if(result.code === 0){
-            alert("회원가입 완료");
-            navigate("/login");
-        }
+        // const result = await sign(id,password,name);
+        // if(result.code === 0){
+        //     alert("회원가입 완료");
+            navigate("/welcome");
+        // }
     }
 
     return (
