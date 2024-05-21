@@ -1,10 +1,10 @@
 import { createTheme } from "@mui/material";
-import { hmgreen } from "./hmcolor";
+import { color_green } from "./hmcolor";
 
 export const theme = createTheme({
     palette : {
         primary : {
-            main : hmgreen,
+            main : color_green,
             contrastText: "white",
         }
     }

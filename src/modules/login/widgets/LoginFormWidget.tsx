@@ -1,9 +1,8 @@
 import { FormControl, Stack, TextField, Typography } from "@mui/material";
 import LoginButton from "../features/LoginButton";
 import { useState } from "react";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Link, useNavigate } from "react-router-dom";
-import { hmgreen } from "../../../utils/color/hmcolor";
+import { color_green } from "../../../utils/color/hmcolor";
 
 export default function LoginFormWidget(){
     const [id, setId] = useState('');
@@ -57,7 +56,7 @@ export default function LoginFormWidget(){
                         onLoginSuccess={onLoginSuccess}
                      />
                     <Link to={'/sign'}>
-                        <Typography textAlign={'center'} color={hmgreen}>
+                        <Typography textAlign={'center'} color={color_green}>
                             Forgot your password?
                         </Typography>
                     </Link>
