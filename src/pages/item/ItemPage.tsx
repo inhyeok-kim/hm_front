@@ -6,24 +6,27 @@ import { IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ItemListPage from "./ItemListPage";
 import { useState } from "react";
+import BasicMobileLayout from "../layout/BasicMobileLayout";
+import { useRouter } from "../../AppRouter";
 
 export default function ItemPage(){
     const {isMobile} = useDevice();
     
     return (
-        <>
+        <BasicMobileLayout menu="item">
             {
                 isMobile?
                 <ItemPageForMobile/>
                 :
                 <ItemPageForTablet/>
             }
-        </>
+        </BasicMobileLayout>
     )    
 }
 
 function ItemPageForMobile(){
     const [open, setOpen] = useState(false);
+    const router = useRouter();
 
     return (
         <Grid2
@@ -72,24 +75,11 @@ function ItemPageForMobile(){
                     height={'calc(100% - 80px)'}
                     sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                 >
-                    <ItemStack headerName="Food" onMore={()=>{setOpen(true)}} />
-                    <ItemStack headerName="Consumables" onMore={()=>{setOpen(true)}} />
-                    <ItemStack headerName="Furniture" onMore={()=>{setOpen(true)}} />
-                    <ItemStack headerName="Living" onMore={()=>{setOpen(true)}} />
+                    <ItemStack headerName="Food" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
+                    <ItemStack headerName="Consumables" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
+                    <ItemStack headerName="Furniture" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
+                    <ItemStack headerName="Living" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
                 </Grid2>
-            </Grid2>
-            <Grid2
-                position={'fixed'}
-                top={0}
-                sx={{transition :'left 0.2s'}}
-                left={open ? '0%':'100%'}
-                width={'100%'}
-                bgcolor={'white'}
-                minHeight={'calc(100% - 80px)'}
-            >
-                <ItemListPage
-                    onClose={()=>{setOpen(false)}}
-                />
             </Grid2>
         </Grid2>
     )

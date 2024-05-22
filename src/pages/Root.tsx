@@ -2,10 +2,6 @@ import { BottomNavigation, BottomNavigationAction, List, ListItem, ListItemButto
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useDevice } from "../utils/hooks/DeviceHooks";
 import { color_green } from "../utils/style/hmstyle";
 import { firstCharToUpperCase } from "../utils/com/StringUtils";
@@ -53,48 +49,6 @@ function RootForMobile(){
                 sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
             >
                 <Outlet/>
-            </Grid2>
-
-            <Grid2
-                position={'fixed'}
-                bottom={0}
-                width={'100%'}
-                height={'80px'}
-                paddingBottom={'10px'}
-                bgcolor={'#FAFAFA'}
-                borderTop={'1px solid #e3e3e3'}
-            >
-                <BottomNavigation 
-                    showLabels
-                    value={value} 
-                    onChange={handleChange}
-                    sx={{height:'60px', background : '#FAFAFA'}}
-                >
-                    <BottomNavigationAction
-                        label="Home"
-                        value="home"
-                        icon={<RestoreIcon />}
-                        onClick={()=>{navigate('/home')}}
-                    />
-                    <BottomNavigationAction
-                        label="Item"
-                        value="item"
-                        icon={<FavoriteIcon />}
-                        onClick={()=>{navigate('/item')}}
-                    />
-                    <BottomNavigationAction
-                        label="Recipe"
-                        value="recipe"
-                        icon={<LocationOnIcon />}
-                        onClick={()=>{navigate('/recipe')}}
-                    />
-                    <BottomNavigationAction 
-                        label="Menu" 
-                        value="menu" 
-                        icon={<FolderIcon />} 
-                        onClick={()=>{navigate('/menu')}}
-                    />
-                </BottomNavigation>
             </Grid2>
 
         </Grid2>

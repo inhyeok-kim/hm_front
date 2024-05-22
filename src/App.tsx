@@ -1,3 +1,6 @@
+import { AppRouter } from "./AppRouter";
+import HomePage from "./pages/home/HomePage";
+import ItemPage from "./pages/item/ItemPage";
 import TestRoot from "./pages/test/TestRoot";
 
 export default function App(){
@@ -5,6 +8,11 @@ export default function App(){
     //     loginCheck();
     // },[]);
     return (
-        <TestRoot />
+        <AppRouter initStack={[
+            [<HomePage/>],
+            [<ItemPage/>],
+            [<HomePage/>],
+            [<HomePage/>]
+        ]} />
     )
 }
