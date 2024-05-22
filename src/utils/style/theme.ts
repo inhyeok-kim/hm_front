@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { color_green } from "./hmstyle";
+import { color_green, color_light_grey } from "./hmstyle";
 
 export const theme = createTheme({
     palette : {

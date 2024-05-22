@@ -1,8 +1,9 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ItemSearchBar from "../../modules/item/widgets/ItemSearchBar";
-import { IconButton } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ItemList from "../../modules/item/widgets/ItemList";
 
 export default function ItemListPage({
     onClose
@@ -11,18 +12,16 @@ export default function ItemListPage({
 }){
 
     return (
-        <Grid2>
+        <Grid2
+            paddingTop={3}
+        >
             <Grid2
                 width={'100%'}
                 padding={2}
-                paddingY={4}
-                top={0}
-                height={90}
+                height={80}
                 container
                 justifyContent={'space-between'}
                 bgcolor={'white'}
-                // borderBottom={'1px solid #e3e3e3'}
-                zIndex={3}
             >
                 <Grid2
                     width={'20%'}
@@ -52,10 +51,14 @@ export default function ItemListPage({
                     </IconButton>
                 </Grid2>
             </Grid2>
-            <Grid2 
-                paddingTop={8}
+            <Grid2
                 paddingBottom={5}
+                overflow={'scroll'}
+                height={'calc(100% - 80px)'}
+                sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
             >
+                <Typography padding={2} fontWeight={"500"} variant="h5">Food</Typography>
+                <ItemList />
             </Grid2>
         </Grid2>
     )

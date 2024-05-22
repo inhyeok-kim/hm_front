@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { MouseEvent, useRef, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { MouseEvent, useEffect, useRef, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import FolderIcon from '@mui/icons-material/Folder';
 import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -28,7 +28,12 @@ export default function Root(){
 }
 
 function RootForMobile(){
+    const location = useLocation();
     const [value, setValue] = useState('home');
+    useEffect(()=>{
+        const path = location.pathname;
+        setValue(path.substring(1,path.length));
+    },[]);
     const navigate = useNavigate();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -93,7 +98,16 @@ function RootForMobile(){
 }
 
 function RootForTablet(){
+    const location = useLocation();
     const [menu, setMenu] = useState('home');
+    useEffect(()=>{
+        const path = location.pathname;
+        setMenu(path.substring(1,path.length));
+        if(selectorRef.current){
+            selectorRef.current.style.top = document.getElementById('menu-'+path.substring(1,path.length))!.offsetTop - 16 + 'px';
+        }
+    },[]);
+
     const selectorRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
@@ -157,6 +171,7 @@ function RootForTablet(){
                                 alignItems={'center'}
                             >
                                 <div
+                                    id={'menu-'+m}
                                     style={{
                                         zIndex:1,
                                         width : '100%',
