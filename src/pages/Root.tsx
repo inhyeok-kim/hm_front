@@ -45,6 +45,7 @@ function RootForMobile(){
                 height={'calc(100% - 81px)'}
                 paddingTop={3}
                 overflow={'auto'}
+                sx={{scrollbarWidth:'none'}}
             >
                 <Outlet/>
             </Grid2>
