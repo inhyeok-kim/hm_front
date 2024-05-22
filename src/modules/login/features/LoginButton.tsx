@@ -8,13 +8,15 @@ interface Props {
 }
 
 export default function LoginButton(props : Props){
+
     async function onClickHandler(){
-        const result = await login(props.id, props.password);
-        if(result.code === 0){
-            props.onLoginSuccess();
-        } else {
-            props.onLoginFail();
-        }
+        props.onLoginSuccess();
+        // const result = await login(props.id, props.password);
+        // if(result.code === 0){
+        //     props.onLoginSuccess();
+        // } else {
+        //     props.onLoginFail();
+        // }
     }
 
     return (
