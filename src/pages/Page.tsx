@@ -1,6 +1,6 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
 import { ReactNode, forwardRef, useEffect, useImperativeHandle, useState } from "react"
-import { useRouter } from "../AppRouter"
+import { useRouter } from "./AppRouter"
 
 export type PageRef = {
     close : Function

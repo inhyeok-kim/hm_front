@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ItemListPage from "./ItemListPage";
 import { useState } from "react";
 import BasicMobileLayout from "../layout/BasicMobileLayout";
-import { useRouter } from "../../AppRouter";
+import { useRouter } from "../AppRouter";
 
 export default function ItemPage(){
     const {isMobile} = useDevice();
