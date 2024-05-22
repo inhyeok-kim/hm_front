@@ -42,8 +42,7 @@ function ItemPageForMobile(){
                 >
                     <Grid2
                         width={'20%'}
-                        paddingX={2}
-                        textAlign={'center'}
+                        textAlign={'left'}
                     >
                         {/* <IconButton>
                             <AddIcon
@@ -58,8 +57,7 @@ function ItemPageForMobile(){
                     </Grid2>
                     <Grid2
                         width={'20%'}
-                        paddingX={2}
-                        textAlign={'center'}
+                        textAlign={'right'}
                     >
                         <IconButton>
                             <AddIcon

@@ -26,8 +26,7 @@ export default function ItemListPage({
             >
                 <Grid2
                     width={'20%'}
-                    paddingX={2}
-                    textAlign={'center'}
+                    textAlign={'left'}
                 >
                     <IconButton
                         onClick={()=>{onClose()}}
@@ -44,8 +43,7 @@ export default function ItemListPage({
                 </Grid2>
                 <Grid2
                     width={'20%'}
-                    paddingX={2}
-                    textAlign={'center'}
+                    textAlign={'right'}
                 >
                     <IconButton>
                         <AddIcon
