@@ -4,63 +4,69 @@ import { IconButton, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ItemList from "../../modules/item/widgets/ItemList";
+import Page, { PageRef } from "../Page";
+import { useRef } from "react";
 
 export default function ItemListPage({
-    onClose
 }:{
-    onClose : Function
 }){
+    const pageRef = useRef<PageRef>();
 
     return (
-        <Grid2
-            paddingTop={3}
-        >
+        <Page ref={pageRef} isSlide>
             <Grid2
-                width={'100%'}
-                padding={2}
-                height={80}
-                container
-                justifyContent={'space-between'}
+                width={'100vw'}
+                height={'calc(100vh - 81px)'}
                 bgcolor={'white'}
+                paddingTop={3}
             >
                 <Grid2
-                    width={'20%'}
-                    textAlign={'left'}
+                    width={'100%'}
+                    padding={2}
+                    height={80}
+                    container
+                    justifyContent={'space-between'}
+                    bgcolor={'white'}
                 >
-                    <IconButton
-                        onClick={()=>{onClose()}}
+                    <Grid2
+                        width={'20%'}
+                        textAlign={'left'}
                     >
-                        <ArrowBackIosNewIcon
-                            color="primary"
-                        />
-                    </IconButton>
+                        <IconButton
+                            onClick={()=>{pageRef.current!.close()}}
+                        >
+                            <ArrowBackIosNewIcon
+                                color="primary"
+                            />
+                        </IconButton>
+                    </Grid2>
+                    <Grid2
+                        width={'50%'}
+                    >
+                        <ItemSearchBar />
+                    </Grid2>
+                    <Grid2
+                        width={'20%'}
+                        textAlign={'right'}
+                    >
+                        <IconButton>
+                            <AddIcon
+                                color="primary"
+                            />
+                        </IconButton>
+                    </Grid2>
                 </Grid2>
                 <Grid2
-                    width={'50%'}
+                    paddingBottom={5}
+                    overflow={'scroll'}
+                    height={'calc(100% - 80px)'}
+                    sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                 >
-                    <ItemSearchBar />
-                </Grid2>
-                <Grid2
-                    width={'20%'}
-                    textAlign={'right'}
-                >
-                    <IconButton>
-                        <AddIcon
-                            color="primary"
-                        />
-                    </IconButton>
+                    <Typography padding={2} fontWeight={"500"} variant="h5">Food</Typography>
+                    <ItemList />
                 </Grid2>
             </Grid2>
-            <Grid2
-                paddingBottom={5}
-                overflow={'scroll'}
-                height={'calc(100% - 80px)'}
-                sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
-            >
-                <Typography padding={2} fontWeight={"500"} variant="h5">Food</Typography>
-                <ItemList />
-            </Grid2>
-        </Grid2>
+        </Page>
     )
 
 }

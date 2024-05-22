@@ -1,4 +1,4 @@
-import Router from "./pages/Router";
+import Router from "./MainFrameRouter";
 
 export default function App(){
     // useEffect(()=>{

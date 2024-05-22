@@ -120,7 +120,7 @@ function Congratulation(){
                         fullWidth 
                         variant="contained"
                         style={{borderRadius : 100, textTransform : 'none'}}
-                        onClick={()=>{navigate('/home')}}
+                        onClick={()=>{navigate('/')}}
                     >Let's Go</Button>
                 </Stack>
             </Grid2>

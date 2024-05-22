@@ -337,7 +337,7 @@ function Congratulation(){
                         fullWidth 
                         variant="text"
                         style={{borderRadius : 100, textTransform : 'none'}}
-                        onClick={()=>{navigate('/home')}}
+                        onClick={()=>{navigate('/')}}
                     >I want to cancel the join request</Button>
                 </Stack>
             </Grid2>
