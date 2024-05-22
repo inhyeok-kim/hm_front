@@ -4,20 +4,23 @@ import { grey } from "@mui/material/colors";
 
 export default function ItemStack({
     headerName
+    ,onMore
 }:{
     headerName : string
+    onMore : Function
 }){
 
     return(
         <Grid2
-            width={'100%'}
+            maxWidth={'100%'}
+            width={'fit-content'}
         >
             <Grid2
                 container
                 justifyContent={'space-between'}
             >
                 <Typography padding={2} fontWeight={"500"} variant="h5">{headerName}</Typography>
-                <Button variant="text" style={{textTransform:'none'}}>More</Button>
+                <Button variant="text" style={{textTransform:'none'}} onClick={()=>{onMore()}}>More</Button>
             </Grid2>
             <Grid2
                 width={'100%'}

@@ -108,6 +108,7 @@ function RootForTablet(){
     return (
         <Grid2
             width={'100%'}
+            height={'100%'}
             container
         >
             <div
@@ -174,7 +175,10 @@ function RootForTablet(){
                 width={'calc(100% - 175px)'}
                 height={'100%'}
                 overflow={'auto'}
-                padding={2}
+                sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
+                paddingTop={2}
+                paddingLeft={2}
+                paddingRight={2}
             >
                 <Outlet/>
             </Grid2>
