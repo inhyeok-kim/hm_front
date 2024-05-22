@@ -15,6 +15,9 @@ export default function ItemPage(){
                 position={'absolute'}
                 width={'100%'}
                 padding={2}
+                paddingY={4}
+                top={0}
+                height={90}
                 container
                 justifyContent={'space-between'}
                 bgcolor={'white'}
