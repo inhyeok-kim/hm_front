@@ -54,7 +54,10 @@ function RootForMobile(){
             >
                 <Outlet/>
             </Grid2>
+
             <Grid2
+                position={'fixed'}
+                bottom={0}
                 width={'100%'}
                 height={'80px'}
                 paddingBottom={'10px'}
@@ -93,6 +96,7 @@ function RootForMobile(){
                     />
                 </BottomNavigation>
             </Grid2>
+
         </Grid2>
     )
 }
