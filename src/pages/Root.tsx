@@ -11,6 +11,7 @@ export default function Root(){
             [<HomePage/>],
             [<ItemPage/>],
             [<HomePage/>],
+            [<HomePage/>],
             [<HomePage/>]
         ]} />
     )

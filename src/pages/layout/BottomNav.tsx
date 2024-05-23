@@ -53,6 +53,12 @@ export default function BottomNav({
                     icon={<FolderIcon />} 
                     onClick={()=>{router.goStack(3)}}
                 />
+                <BottomNavigationAction 
+                    label="Setting" 
+                    value="setting" 
+                    icon={<FolderIcon />} 
+                    onClick={()=>{router.goStack(4)}}
+                />
             </BottomNavigation>
         </Grid2>
     )

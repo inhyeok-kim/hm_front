@@ -8,6 +8,7 @@ import ItemListPage from "./ItemListPage";
 import { useState } from "react";
 import BasicMobileLayout from "../layout/BasicMobileLayout";
 import { useRouter } from "../AppRouter";
+import ItemDetailPage from "./ItemDetailPage";
 
 export default function ItemPage(){
     const {isMobile} = useDevice();
@@ -62,7 +63,9 @@ function ItemPageForMobile(){
                         width={'20%'}
                         textAlign={'right'}
                     >
-                        <IconButton>
+                        <IconButton
+                            onClick={()=>{router.pushPage(<ItemDetailPage />)}}
+                        >
                             <AddIcon
                                 color="primary"
                             />

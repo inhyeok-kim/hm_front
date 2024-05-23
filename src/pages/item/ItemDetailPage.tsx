@@ -1,19 +1,19 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ItemSearchBar from "../../modules/item/widgets/ItemSearchBar";
-import { IconButton, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ItemList from "../../modules/item/widgets/ItemList";
 import Page, { PageRef } from "../Page";
 import { useRef } from "react";
-import { useRouter } from "../AppRouter";
-import ItemDetailPage from "./ItemDetailPage";
+import ItemFormWidget from "../../modules/item/widgets/ItemFormWidget";
 
-export default function ItemListPage({
+export default function ItemDetailPage({
+    isNew
 }:{
+    isNew? : boolean
 }){
     const pageRef = useRef<PageRef>();
-    const router = useRouter();
 
     return (
         <Page ref={pageRef} isSlide>
@@ -25,7 +25,6 @@ export default function ItemListPage({
                 <Grid2
                     width={'100%'}
                     padding={2}
-                    height={80}
                     container
                     justifyContent={'space-between'}
                     bgcolor={'white'}
@@ -46,40 +45,29 @@ export default function ItemListPage({
                     <Grid2
                         width={'50%'}
                     >
-                        <ItemSearchBar />
+                        {/* <ItemSearchBar /> */}
                     </Grid2>
                     <Grid2
                         width={'20%'}
                         textAlign={'right'}
                     >
-                        <IconButton
-                            onClick={()=>{router.pushPage(<ItemDetailPage />)}}
-                        >
-                            <AddIcon
-                                color="primary"
-                            />
-                        </IconButton>
+                        <Button style={{textTransform : 'none'}}>Save</Button>
                     </Grid2>
                 </Grid2>
-                <Grid2
-                    paddingBottom={5}
-                    overflow={'scroll'}
-                    height={'calc(100% - 80px)'}
-                    sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
-                >
-                    <Typography 
-                        position={'absolute'}
-                        bgcolor={'white'}
-                        width={'100%'}
-                        padding={2} 
-                        zIndex={1}
-                        fontWeight={"500"} variant="h5">Food</Typography>
+                <Grid2>
+                    <ItemFormWidget />
+                </Grid2>
+                {   isNew?
+                    ''
+                    :
                     <Grid2
-                        marginTop={'4rem'}
+                        width={'100%'}
+                        padding={2}
+                        textAlign={'right'}
                     >
-                        <ItemList />
+                        <Button style={{textTransform : 'none'}}>Delete</Button>
                     </Grid2>
-                </Grid2>
+                }
             </Grid2>
         </Page>
     )

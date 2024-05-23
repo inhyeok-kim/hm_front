@@ -15,7 +15,6 @@ export default function BasicMobileLayout({
             <Grid2
                 width={'100vw'}
                 height={'calc(100vh - 81px)'}
-                paddingTop={3}
                 overflow={'auto'}
                 sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
             >
