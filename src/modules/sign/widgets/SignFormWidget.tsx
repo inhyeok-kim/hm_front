@@ -12,7 +12,7 @@ export default function SignFormWidget(){
         // const result = await sign(id,password,name);
         // if(result.code === 0){
         //     alert("회원가입 완료");
-            navigate("/welcome");
+            navigate("/welcome",{replace : true});
         // }
     }
 

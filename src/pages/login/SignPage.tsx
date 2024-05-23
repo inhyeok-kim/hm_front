@@ -28,7 +28,7 @@ export default function SignPage(){
                         marginBottom={5}
                     >
                         <Grid2 xs={3} textAlign={"left"}>
-                            <Button onClick={()=>{navigate("/login")}} style={{textTransform : 'none'}} variant="text">Log In</Button>
+                            <Button onClick={()=>{navigate("/login",{replace : true})}} style={{textTransform : 'none'}} variant="text">Log In</Button>
                         </Grid2>
                         <Grid2 xs={6}>
                             <Typography textAlign={"center"} variant="h5" fontWeight={"bold"}>Sign Up</Typography>
@@ -58,7 +58,7 @@ export default function SignPage(){
                         marginBottom={5}
                     >
                         <Grid2 xs={3} textAlign={"left"}>
-                            <Button onClick={()=>{navigate("/login")}} style={{textTransform : 'none'}} variant="text">Log In</Button>
+                            <Button onClick={()=>{navigate("/login",{replace : true})}} style={{textTransform : 'none'}} variant="text">Log In</Button>
                         </Grid2>
                         <Grid2 xs={6}>
                             <Typography textAlign={"center"} variant="h5" fontWeight={"bold"}>Sign Up</Typography>

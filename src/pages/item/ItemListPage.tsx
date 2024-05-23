@@ -62,8 +62,18 @@ export default function ItemListPage({
                     height={'calc(100% - 80px)'}
                     sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                 >
-                    <Typography padding={2} fontWeight={"500"} variant="h5">Food</Typography>
-                    <ItemList />
+                    <Typography 
+                        position={'absolute'}
+                        bgcolor={'white'}
+                        width={'100%'}
+                        padding={2} 
+                        zIndex={1}
+                        fontWeight={"500"} variant="h5">Food</Typography>
+                    <Grid2
+                        marginTop={'4rem'}
+                    >
+                        <ItemList />
+                    </Grid2>
                 </Grid2>
             </Grid2>
         </Page>

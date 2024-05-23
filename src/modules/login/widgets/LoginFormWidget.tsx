@@ -11,7 +11,7 @@ export default function LoginFormWidget(){
 
     const navigate = useNavigate();
     function onLoginSuccess(){
-        navigate('/');
+        navigate('/',{replace : true});
     }
 
     function onLoginFail(){
