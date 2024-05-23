@@ -15,7 +15,7 @@ const Page = forwardRef(({
 },ref)=>{
     const router = useRouter();
 
-    const [left, setLeft] = useState(isSlide ? '100%':'0px');
+    const [left, setLeft] = useState(isSlide ? '100vw':'0px');
     useEffect(()=>{
         if(isSlide){
             setLeft('0px');
