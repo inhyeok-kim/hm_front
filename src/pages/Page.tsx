@@ -18,7 +18,9 @@ const Page = forwardRef(({
     const [left, setLeft] = useState(isSlide ? '100vw':'0px');
     useEffect(()=>{
         if(isSlide){
-            setLeft('0px');
+            setTimeout(()=>{
+                setLeft('0px');
+            },1);
         }
     },[]);
 
