@@ -33,31 +33,31 @@ export default function BottomNav({
                     label="Home"
                     value="home"
                     icon={<RestoreIcon />}
-                    onClick={()=>{router.goStack(0)}}
+                    onClick={()=>{router.goStack(0,'home')}}
                 />
                 <BottomNavigationAction
                     label="Item"
                     value="item"
                     icon={<FavoriteIcon />}
-                    onClick={()=>{router.goStack(1)}}
+                    onClick={()=>{router.goStack(1,'item')}}
                 />
                 <BottomNavigationAction
                     label="Recipe"
                     value="recipe"
                     icon={<LocationOnIcon />}
-                    onClick={()=>{router.goStack(2)}}
+                    onClick={()=>{router.goStack(2,'recipe')}}
                 />
                 <BottomNavigationAction 
                     label="Menu" 
                     value="menu" 
                     icon={<FolderIcon />} 
-                    onClick={()=>{router.goStack(3)}}
+                    onClick={()=>{router.goStack(3,'menu')}}
                 />
                 <BottomNavigationAction 
                     label="Setting" 
                     value="setting" 
                     icon={<FolderIcon />} 
-                    onClick={()=>{router.goStack(4)}}
+                    onClick={()=>{router.goStack(4,'setting')}}
                 />
             </BottomNavigation>
         </Grid2>

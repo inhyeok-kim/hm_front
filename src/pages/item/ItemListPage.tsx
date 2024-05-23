@@ -53,7 +53,7 @@ export default function ItemListPage({
                         textAlign={'right'}
                     >
                         <IconButton
-                            onClick={()=>{router.pushPage(<ItemDetailPage />)}}
+                            onClick={()=>{router.pushPage(<ItemDetailPage isNew />)}}
                         >
                             <AddIcon
                                 color="primary"

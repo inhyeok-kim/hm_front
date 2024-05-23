@@ -9,13 +9,17 @@ export type PageRef = {
 const Page = forwardRef(({
     children,
     isSlide,
+    baseLeft,
+    baseTop
 }:{
     children : ReactNode | ReactNode[]
     isSlide? : boolean
+    baseLeft? : string
+    baseTop? : string
 },ref)=>{
     const router = useRouter();
-
-    const [left, setLeft] = useState(isSlide ? '100vw':'0px');
+    const [left, setLeft] = useState(isSlide ? '100vw':(baseLeft ? baseLeft : '0px'));
+    const [top, setTop] = useState(isSlide ? '100vh':(baseTop ? baseTop : '0px'));
     useEffect(()=>{
         if(isSlide){
             setTimeout(()=>{
@@ -43,6 +47,7 @@ const Page = forwardRef(({
         <Grid2
             position={'fixed'}
             left={left}
+            top={top}
             sx={{
                 transition : 'left 0.3s'       
             }}

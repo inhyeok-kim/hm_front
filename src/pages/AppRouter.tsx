@@ -4,21 +4,26 @@ import { ReactNode, createContext, useContext, useState } from "react"
 const RouterContext = createContext<any>(null);
 
 export function AppRouter({
+    children,
     initStack,
+    initMenu
 }:{
+    children : ReactNode | ReactNode[]
     initStack : ReactNode[][]
+    initMenu : string
 }){
     const [stack, setStack] = useState<ReactNode[][]>(initStack);
     const [activeStackNumber, setActiveStackNumber] = useState<number>(0);
+    const [activeMenu, setActiveMenu] = useState<string>(initMenu);
 
     return (
-        <RouterContext.Provider value={{stack,setStack,activeStackNumber,setActiveStackNumber}}>
-            <RouterProvier/>
+        <RouterContext.Provider value={{stack,setStack,activeStackNumber,setActiveStackNumber,activeMenu,setActiveMenu}}>
+            {children}
         </RouterContext.Provider>
     )
 }
 
-function RouterProvier(){
+export function RouterOutlet(){
     const {stack,activeStackNumber} = useContext(RouterContext);
 
     return (
@@ -46,6 +51,8 @@ function RouterStackWrapper({
     
     return (
         <Grid2
+            width={'100%'}
+            height={'100%'}
             display={isActive ? 'unset' : 'none'}
         >
             {stack.map((m : ReactNode,i : number)=>(
@@ -68,12 +75,16 @@ function RouterPageWrapper({children} : {children : ReactNode}){
 }
 
 export function useLocation(){
-    const {stack} = useContext(RouterContext);
-    return stack;
+    const {stack,activeStackNumber, activeMenu} = useContext(RouterContext);
+    return {
+        menu : activeMenu,
+        stack : stack,
+        stackNumber : activeStackNumber
+    };
 }
 
 export function useRouter(){
-    const {stack,setStack,activeStackNumber,setActiveStackNumber} = useContext(RouterContext);
+    const {stack,setStack,activeStackNumber,setActiveStackNumber,setActiveMenu} = useContext(RouterContext);
 
     const func = {
         goPage : function(page : ReactNode){
@@ -91,9 +102,11 @@ export function useRouter(){
             ns[activeStackNumber].pop();
             setStack(ns);
         }
-        ,goStack : function(num : number){
+        ,goStack : function(num : number, menu : string){
             setActiveStackNumber(num);
+            setActiveMenu(menu);
         }
     }
     return func
 }
+

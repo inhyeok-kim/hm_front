@@ -1,6 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
+import { useRouter } from "../../../pages/AppRouter";
+import ItemDetailPage from "../../../pages/item/ItemDetailPage";
 
 export default function ItemStack({
     headerName
@@ -9,6 +11,7 @@ export default function ItemStack({
     headerName : string
     onMore : Function
 }){
+    const router = useRouter();
 
     return(
         <Grid2
@@ -37,6 +40,7 @@ export default function ItemStack({
                         display={'inline-block'}
                         width={'6rem'}
                         marginRight={2}
+                        onClick={()=>{router.pushPage(<ItemDetailPage />)}}
                     >
                         <Box
                             width={'6rem'}

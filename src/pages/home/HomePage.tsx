@@ -3,13 +3,17 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
 import { useDevice } from "../../utils/hooks/DeviceHooks";
 import BasicMobileLayout from "../layout/BasicMobileLayout";
+import Page from "../Page";
 
 export default function HomePage(){
     const {isMobile} = useDevice();
 
     return (
-        <BasicMobileLayout menu="home">
-            <Grid2>
+        <Page>
+            <Grid2
+                width={'100vw'}
+                height={'calc(100vh - 81px)'}
+            >
                 <Grid2
                     width={'100%'}
                 >
@@ -189,6 +193,6 @@ export default function HomePage(){
                 </Grid2>
 
             </Grid2>
-        </BasicMobileLayout>
+        </Page>
     )
 }
