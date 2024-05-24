@@ -8,6 +8,7 @@ import Page, { PageRef } from "../Page";
 import { useRef } from "react";
 import { useRouter } from "../AppRouter";
 import ItemDetailPage from "./ItemDetailPage";
+import BasicMobileLayout from "../../layout/BasicMobileLayout";
 
 export default function ItemListPage({
 }:{
@@ -17,11 +18,7 @@ export default function ItemListPage({
 
     return (
         <Page ref={pageRef} isSlide>
-            <Grid2
-                width={'100vw'}
-                height={'calc(100vh - 81px)'}
-                bgcolor={'white'}
-            >
+            <BasicMobileLayout>
                 <Grid2
                     width={'100%'}
                     padding={2}
@@ -80,7 +77,7 @@ export default function ItemListPage({
                         <ItemList />
                     </Grid2>
                 </Grid2>
-            </Grid2>
+            </BasicMobileLayout>
         </Page>
     )
 

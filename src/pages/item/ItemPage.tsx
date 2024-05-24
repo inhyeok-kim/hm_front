@@ -6,10 +6,11 @@ import { IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ItemListPage from "./ItemListPage";
 import { useState } from "react";
-import BasicMobileLayout from "../layout/BasicMobileLayout";
+import BasicMobileLayout from "../../layout/BasicMobileLayout";
 import { useRouter } from "../AppRouter";
 import ItemDetailPage from "./ItemDetailPage";
 import Page from "../Page";
+import BasicTabletLayout from "../../layout/BasicTabletLayout";
 
 export default function ItemPage(){
     const {isMobile} = useDevice();
@@ -32,10 +33,7 @@ function ItemPageForMobile(){
 
     return (
         <Page>
-            <Grid2
-                width={'100vw'}
-                height={'calc(100vh - 81px)'}
-            >
+            <BasicMobileLayout>
                 <Grid2
                     height={'100%'}
                 >
@@ -87,38 +85,34 @@ function ItemPageForMobile(){
                         <ItemStack headerName="Living" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
                     </Grid2>
                 </Grid2>
-            </Grid2>
+            </BasicMobileLayout>
         </Page>
     )
 }
 
 function ItemPageForTablet(){
     return (
-        <Page
-            baseLeft={'175px'}
-        >
-            <Grid2
-                width={'100%'}
-                height={'100%'}
-            >
+        <Page>
+            <BasicTabletLayout>
                 <Grid2
                     width={'100%'}
                     height={'100%'}
                 >
                     <Grid2
-                        width={'100%'}
                         padding={2}
-                        paddingY={4}
-                        height={90}
+                        height={60}
+                        paddingBottom={0}
                         container
                         bgcolor={'white'}
                         zIndex={1}
-                        justifyContent={'space-between'}
                     >
                         <Grid2
-                            width={'20%'}
+                            maxWidth={'20rem'}
+                        >
+                            <ItemSearchBar />
+                        </Grid2>
+                        <Grid2
                             paddingX={2}
-                            textAlign={'center'}
                         >
                             <IconButton>
                                 <AddIcon
@@ -126,14 +120,9 @@ function ItemPageForTablet(){
                                 />
                             </IconButton>
                         </Grid2>
-                        <Grid2
-                            width={'50%'}
-                        >
-                            <ItemSearchBar />
-                        </Grid2>
                     </Grid2>
                     <Grid2
-                        height={'calc(100% - 90px)'}
+                        height={'calc(100% - 76px)'}
                         overflow={'scroll'}
                         sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                     >
@@ -143,7 +132,7 @@ function ItemPageForTablet(){
                         <ItemStack headerName="Living" onMore={()=>{}} />
                     </Grid2>
                 </Grid2>
-            </Grid2>
+            </BasicTabletLayout>
         </Page>
     )
 }

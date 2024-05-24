@@ -1,16 +1,15 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { MouseEvent, ReactNode, useEffect, useRef } from "react";
-import { useLocation, useRouter } from "../AppRouter";
-import { color_green } from "../../utils/style/hmstyle";
+import { RouterOutlet, useLocation, useRouter } from "../pages/AppRouter";
+import { color_green } from "../utils/style/hmstyle";
 import { Stack, Typography } from "@mui/material";
-import { firstCharToUpperCase } from "../../utils/com/StringUtils";
+import { firstCharToUpperCase } from "../utils/com/StringUtils";
+import BasicTabletLayout from "../layout/BasicTabletLayout";
 
 const menuList = ['home','item','recipe','menu']
 
-export default function BasicTabletLayout({
-    children
+export default function BasicTabletContainer({
 }:{
-    children : ReactNode | ReactNode[]
 }){
     
     const selectorRef = useRef<HTMLDivElement>(null);
@@ -100,14 +99,8 @@ export default function BasicTabletLayout({
             </Grid2>
             <Grid2
                 width={'calc(100% - 175px)'}
-                height={'100%'}
-                overflow={'auto'}
-                sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
-                paddingTop={2}
-                paddingLeft={2}
-                paddingRight={2}
             >
-                {children}
+                <RouterOutlet />
             </Grid2>
         </Grid2>
     )

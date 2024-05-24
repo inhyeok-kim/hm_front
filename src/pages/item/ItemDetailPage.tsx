@@ -7,6 +7,7 @@ import ItemList from "../../modules/item/widgets/ItemList";
 import Page, { PageRef } from "../Page";
 import { useRef } from "react";
 import ItemFormWidget from "../../modules/item/widgets/ItemFormWidget";
+import BasicMobileLayout from "../../layout/BasicMobileLayout";
 
 export default function ItemDetailPage({
     isNew
@@ -17,11 +18,7 @@ export default function ItemDetailPage({
 
     return (
         <Page ref={pageRef} isSlide>
-            <Grid2
-                width={'100vw'}
-                height={'calc(100vh - 81px)'}
-                bgcolor={'white'}
-            >
+            <BasicMobileLayout>
                 <Grid2
                     width={'100%'}
                     padding={2}
@@ -68,7 +65,7 @@ export default function ItemDetailPage({
                         <Button style={{textTransform : 'none'}}>Delete</Button>
                     </Grid2>
                 }
-            </Grid2>
+            </BasicMobileLayout>
         </Page>
     )
 

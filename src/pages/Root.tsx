@@ -1,10 +1,9 @@
 import { useDevice } from "../utils/hooks/DeviceHooks";
 import { AppRouter, RouterOutlet } from "./AppRouter";
-import Page from "./Page";
+import BasicMobileContainer from "../container/BasicMobileContainer";
 import HomePage from "./home/HomePage";
 import ItemPage from "./item/ItemPage";
-import BasicMobileLayout from "./layout/BasicMobileLayout";
-import BasicTabletLayout from "./layout/BasicTabletLayout";
+import BasicTabletContainer from "../container/BasicTabletContainer";
 
 export default function Root(){
     const {isMobile} = useDevice();
@@ -24,13 +23,9 @@ export default function Root(){
         >
             {
                 isMobile?
-                    <BasicMobileLayout>
-                        <RouterOutlet/>
-                    </BasicMobileLayout>
+                    <BasicMobileContainer />
                 :
-                    <BasicTabletLayout>
-                        <RouterOutlet/>
-                    </BasicTabletLayout>
+                    <BasicTabletContainer />
             }
             
         </AppRouter>
