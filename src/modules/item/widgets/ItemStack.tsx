@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, ListItem, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
 import { useRouter } from "../../../pages/AppRouter";
@@ -32,25 +32,29 @@ export default function ItemStack({
                     scrollbarWidth : 'none',
                 }}
             >
-                <Grid2
+                <Stack
+                    direction={"row"}
                     whiteSpace={"nowrap"}
                     paddingLeft={2}
+                    spacing={2}
                 >
-                    <Grid2
-                        display={'inline-block'}
-                        width={'6rem'}
-                        marginRight={2}
-                        onClick={()=>{router.pushPage(<ItemDetailPage />)}}
+                    <ListItem
+                        style={{width : 'fit-content'}}
+                        onClick={()=>{alert("hi")}}
                     >
-                        <Box
+                        <Grid2
+                            display={'inline-block'}
                             width={'6rem'}
-                            height={'6rem'}
-                            bgcolor={grey[300]}
-                            borderRadius={2}
-                            onClick={()=>{alert('왜 안됨?')}}
-                        ></Box>
-                        <Typography variant="subtitle2">Item #1 name</Typography>
-                    </Grid2>
+                        >
+                            <Box
+                                width={'6rem'}
+                                height={'6rem'}
+                                bgcolor={grey[300]}
+                                borderRadius={2}
+                            ></Box>
+                            <Typography variant="subtitle2">Item #1 name</Typography>
+                        </Grid2>
+                    </ListItem>
                     <Grid2
                         display={'inline-block'}
                         width={'6rem'}
@@ -92,7 +96,7 @@ export default function ItemStack({
                         ></Box>
                         <Typography variant="subtitle2">Item #1 name</Typography>
                     </Grid2>
-                </Grid2>
+                </Stack>
             </Grid2>
         </Grid2>
     )
