@@ -47,6 +47,7 @@ export default function ItemStack({
                             height={'6rem'}
                             bgcolor={grey[300]}
                             borderRadius={2}
+                            onClick={()=>{alert('왜 안됨?')}}
                         ></Box>
                         <Typography variant="subtitle2">Item #1 name</Typography>
                     </Grid2>
@@ -55,6 +56,7 @@ export default function ItemStack({
                         width={'6rem'}
                         marginRight={2}
                         onTouchEnd={()=>{router.pushPage(<ItemDetailPage />)}}
+                        onClick={()=>{alert('왜 안됨?')}}
                     >
                         <Box
                             width={'6rem'}
