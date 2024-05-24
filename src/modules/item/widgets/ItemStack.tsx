@@ -1,4 +1,4 @@
-import { Box, Button, ListItem, Stack, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
 import { useRouter } from "../../../pages/AppRouter";
@@ -32,35 +32,15 @@ export default function ItemStack({
                     scrollbarWidth : 'none',
                 }}
             >
-                <Stack
-                    direction={"row"}
+                <Grid2
                     whiteSpace={"nowrap"}
                     paddingLeft={2}
-                    spacing={2}
                 >
-                    <ListItem
-                        style={{width : 'fit-content'}}
-                        onClick={()=>{alert("hi")}}
-                    >
-                        <Grid2
-                            display={'inline-block'}
-                            width={'6rem'}
-                        >
-                            <Box
-                                width={'6rem'}
-                                height={'6rem'}
-                                bgcolor={grey[300]}
-                                borderRadius={2}
-                            ></Box>
-                            <Typography variant="subtitle2">Item #1 name</Typography>
-                        </Grid2>
-                    </ListItem>
                     <Grid2
                         display={'inline-block'}
                         width={'6rem'}
                         marginRight={2}
-                        onTouchEnd={()=>{router.pushPage(<ItemDetailPage />)}}
-                        onClick={()=>{alert('왜 안됨?')}}
+                        onClick={()=>{router.pushPage(<ItemDetailPage />)}}
                     >
                         <Box
                             width={'6rem'}
@@ -96,7 +76,20 @@ export default function ItemStack({
                         ></Box>
                         <Typography variant="subtitle2">Item #1 name</Typography>
                     </Grid2>
-                </Stack>
+                    <Grid2
+                        display={'inline-block'}
+                        width={'6rem'}
+                        marginRight={2}
+                    >
+                        <Box
+                            width={'6rem'}
+                            height={'6rem'}
+                            bgcolor={grey[300]}
+                            borderRadius={2}
+                        ></Box>
+                        <Typography variant="subtitle2">Item #1 name</Typography>
+                    </Grid2>
+                </Grid2>
             </Grid2>
         </Grid2>
     )
