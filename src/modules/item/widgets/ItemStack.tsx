@@ -54,6 +54,7 @@ export default function ItemStack({
                         display={'inline-block'}
                         width={'6rem'}
                         marginRight={2}
+                        onTouchEnd={()=>{router.pushPage(<ItemDetailPage />)}}
                     >
                         <Box
                             width={'6rem'}
