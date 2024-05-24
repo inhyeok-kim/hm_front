@@ -80,5 +80,4 @@ export default function ItemListPage({
             </BasicMobileLayout>
         </Page>
     )
-
 }

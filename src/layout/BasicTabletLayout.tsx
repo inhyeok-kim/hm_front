@@ -15,9 +15,9 @@ export default function BasicTabletLayout({
             height={'100vh'}
             overflow={'auto'}
             sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
-            paddingTop={2}
-            paddingLeft={2}
-            paddingRight={2}
+            // paddingTop={2}
+            // paddingLeft={2}
+            // paddingRight={2}
         >
             {children}
         </Grid2>
