@@ -83,7 +83,7 @@ export default function ItemListForTablet({
                     bgcolor={'white'}
                     padding={2} 
                     zIndex={1}
-                    fontWeight={"500"} variant="h5">Food</Typography>
+                    fontWeight={"500"} variant="h5">{itemClassType}</Typography>
                 <Grid2
                     overflow={'scroll'}
                     height={'calc(100% - 64px)'}

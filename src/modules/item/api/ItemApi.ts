@@ -17,7 +17,7 @@ const itemAPI = {
         return itemAxios.put("",{...item});
     },
     getItemList(itemClassType : ItemClassType, page? : number, pageSize? : number){
-        let path = "/list";
+        const path = "/list";
         return itemAxios.get(path,{
             params : {
                 classType : itemClassType,
@@ -31,6 +31,9 @@ const itemAPI = {
     }
     ,countPlus({id, count} : {id:number, count:number}){
         return itemAxios.post("/count_plus",{id,count});
+    }
+    ,deleteItem(id : number){
+        return itemAxios.delete("/"+id);
     }
 
 }

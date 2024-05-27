@@ -120,7 +120,7 @@ export default function ItemFormWidget({
                     <MenuItem dense value="CONSUMABLES">
                         소모품
                     </MenuItem>
-                    <MenuItem dense value="PERMENANT">
+                    <MenuItem dense value="PERMANENT">
                         반영구/영구
                     </MenuItem>
                 </Select>

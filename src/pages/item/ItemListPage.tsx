@@ -81,7 +81,7 @@ export default function ItemListPage({
                         width={'100%'}
                         padding={2} 
                         zIndex={1}
-                        fontWeight={"500"} variant="h5">Food</Typography>
+                        fontWeight={"500"} variant="h5">{itemClassType}</Typography>
                     <Grid2
                         marginTop={'4rem'}
                     >

@@ -63,6 +63,10 @@ export default function ItemDetailModal({
             queryClient.invalidateQueries({queryKey : ['item',editItem.id]})
         }
     })
+    const deleteItem = useMutation({
+        mutationFn : (itemId : number)=>itemAPI.deleteItem(itemId)
+        ,onSuccess : ()=>{queryClient.invalidateQueries({queryKey : ['item',editItem.classType]})}
+    })
 
     function doSave(){
         if(editItem.id && editItem.id > 0){
@@ -73,7 +77,8 @@ export default function ItemDetailModal({
         onClose();
     }
     function doDelete(){
-        
+        deleteItem.mutate(editItem.id!)
+        onClose();
     }
 
     return (
