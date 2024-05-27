@@ -9,12 +9,23 @@ import { useRef } from "react";
 import { useRouter } from "../AppRouter";
 import ItemDetailPage from "./ItemDetailPage";
 import BasicMobileLayout from "../../layout/BasicMobileLayout";
+import { Item, ItemClassType } from "../../modules/item/ItemType";
+import { useQuery } from "@tanstack/react-query";
+import itemAPI from "../../modules/item/api/ItemApi";
 
 export default function ItemListPage({
+    itemClassType
 }:{
+    itemClassType : ItemClassType
 }){
     const pageRef = useRef<PageRef>();
     const router = useRouter();
+
+    const itemList = useQuery({
+        queryKey : ['item',itemClassType]
+        ,queryFn : ()=>itemAPI.getItemList(itemClassType)
+        ,select : response=>response.data.data.content
+    })
 
     return (
         <Page ref={pageRef} isSlide>
@@ -50,7 +61,7 @@ export default function ItemListPage({
                         textAlign={'right'}
                     >
                         <IconButton
-                            onClick={()=>{router.pushPage(<ItemDetailPage isNew />)}}
+                            onClick={()=>{router.pushPage(<ItemDetailPage isNew id={0} />)}}
                         >
                             <AddIcon
                                 color="primary"
@@ -74,7 +85,14 @@ export default function ItemListPage({
                     <Grid2
                         marginTop={'4rem'}
                     >
-                        <ItemList />
+                        {
+                            itemList.isSuccess ? 
+                            <ItemList list={itemList.data}
+                                onItemClick={(id:number)=>{router.pushPage(<ItemDetailPage id={id} />)}}
+                            />
+                            :
+                            ''
+                        }
                     </Grid2>
                 </Grid2>
             </BasicMobileLayout>

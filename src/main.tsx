@@ -6,13 +6,17 @@ import { worker } from './mock/worker.ts'
 import { RecoilRoot } from 'recoil'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './utils/style/theme.ts'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 
 if (import.meta.env.MODE === 'mock') {
   await worker.start();
 }
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
+  <QueryClientProvider client={queryClient}>
     <BrowserRouter basename='/'>
       <RecoilRoot>
         <ThemeProvider theme={theme}>
@@ -20,4 +24,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </ThemeProvider>
       </RecoilRoot>
     </BrowserRouter>
+  </QueryClientProvider>
 )

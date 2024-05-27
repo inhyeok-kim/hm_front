@@ -5,8 +5,8 @@ const baseURL = import.meta.env.VITE_DEFAULT_API_SERVER+"/auth";
 export const authDatas = [
     {
         id : 1,
-        loginId : "test",
-        password : "1234"
+        loginId : "test1",
+        password : "test1"
     }
 ]
 

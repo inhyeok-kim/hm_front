@@ -26,7 +26,7 @@ export default function SignFormWidget(){
                     InputProps={{disableUnderline : true, style:{borderRadius : '8px'}}}
                     
                     size="small" 
-                    label='Email' 
+                    label='ID' 
                     variant="filled" 
                     value={id} 
                     onChange={(e)=>{setId(e.currentTarget.value)}} 

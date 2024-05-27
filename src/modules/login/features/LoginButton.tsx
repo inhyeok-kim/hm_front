@@ -10,13 +10,12 @@ interface Props {
 export default function LoginButton(props : Props){
 
     async function onClickHandler(){
-        props.onLoginSuccess();
-        // const result = await login(props.id, props.password);
-        // if(result.code === 0){
-        //     props.onLoginSuccess();
-        // } else {
-        //     props.onLoginFail();
-        // }
+        const result = await login(props.id, props.password);
+        if(result.code === 0){
+            props.onLoginSuccess();
+        } else {
+            props.onLoginFail();
+        }
     }
 
     return (
