@@ -1,23 +1,35 @@
+import { Box, Button, IconButton, Modal } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { Button, IconButton, Typography } from "@mui/material";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import Page, { PageRef } from "../Page";
-import { useEffect, useRef, useState } from "react";
-import ItemFormWidget from "../../modules/item/widgets/ItemFormWidget";
-import BasicMobileLayout from "../../layout/BasicMobileLayout";
-import { Item, ItemClassType } from "../../modules/item/ItemType";
+import ItemFormWidget from "./ItemFormWidget";
+import CloseIcon from '@mui/icons-material/Close';
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import itemAPI from "../../modules/item/api/ItemApi";
+import { useEffect, useState } from "react";
+import { Item } from "../ItemType";
+import itemAPI from "../api/ItemApi";
 
-export default function ItemDetailPage({
-    isNew,
-    id = 0
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '30vw',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 2,
+    borderRadius : '8px'
+  };
+
+export default function ItemDetailModal({
+    open
+    ,onClose
+    ,isNew
+    ,id = 0
 }:{
+    open : boolean
+    onClose : Function
     isNew? : boolean
     id? : number
 }){
-    const pageRef = useRef<PageRef>();
-
     const [editItem, setEditItem] = useState<Item>({
         id : 0,
         classType : "CONSUMABLES",
@@ -33,12 +45,16 @@ export default function ItemDetailPage({
         , enabled : !isNew && id > 0 
     })
 
+    useEffect(()=>{
+        if(id > 0){
+            itemQuery.refetch();
+        }
+    },[id]);
+
     const queryClient = useQueryClient()
     const createItem = useMutation({
         mutationFn : (item : Item)=> itemAPI.createItem(item)
-        ,onSuccess : ()=>{
-            queryClient.invalidateQueries({queryKey : ['item',editItem.classType]})
-        }
+        ,onSuccess : ()=>{queryClient.invalidateQueries({queryKey : ['item',editItem.classType]})}
     });
     const updateItem = useMutation({
         mutationFn : (item : Item)=> itemAPI.updateItem(item)
@@ -47,7 +63,6 @@ export default function ItemDetailPage({
             queryClient.invalidateQueries({queryKey : ['item',editItem.id]})
         }
     })
-
     const deleteItem = useMutation({
         mutationFn : (itemId : number)=>itemAPI.deleteItem(itemId)
         ,onSuccess : ()=>{queryClient.invalidateQueries({queryKey : ['item',editItem.classType]})}
@@ -59,19 +74,25 @@ export default function ItemDetailPage({
         } else {
             createItem.mutate(editItem)
         }
-        pageRef.current!.close()
+        onClose();
     }
     function doDelete(){
         deleteItem.mutate(editItem.id!)
-        pageRef.current!.close()
+        onClose();
     }
 
     return (
-        <Page ref={pageRef} isSlide>
-            <BasicMobileLayout>
+        <Modal
+            open={open}
+            onClose={()=>{onClose()}}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box
+                sx={style}
+            >
                 <Grid2
                     width={'100%'}
-                    padding={2}
                     container
                     justifyContent={'space-between'}
                     bgcolor={'white'}
@@ -81,9 +102,9 @@ export default function ItemDetailPage({
                         textAlign={'left'}
                     >
                         <IconButton
-                            onClick={()=>{pageRef.current!.close()}}
+                            onClick={()=>{onClose()}}
                         >
-                            <ArrowBackIosNewIcon
+                            <CloseIcon
                                 fontSize="small"
                                 color="primary"
                             />
@@ -103,37 +124,36 @@ export default function ItemDetailPage({
                 </Grid2>
                 <Grid2>
                     {isNew ? 
+                        <ItemFormWidget 
+                            initItem={{
+                                id : 0,
+                                classType : "CONSUMABLES",
+                                count : 0,
+                                name : '',
+                                type : "CONSUMABLES"
+                            }}
+                            onChange={(item : Item)=>{setEditItem(item)}} />
+                    :
+                        itemQuery.isSuccess ?
                             <ItemFormWidget 
-                                initItem={{
-                                    id : 0,
-                                    classType : "CONSUMABLES",
-                                    count : 0,
-                                    name : '',
-                                    type : "CONSUMABLES"
-                                }}
+                                initItem={itemQuery.data}
                                 onChange={(item : Item)=>{setEditItem(item)}} />
                         :
-                            itemQuery.isSuccess ?
-                                <ItemFormWidget 
-                                    initItem={itemQuery.data}
-                                    onChange={(item : Item)=>{setEditItem(item)}} />
-                            :
-                                ''
-                        }
+                            ''
+                    }
                 </Grid2>
                 {   isNew?
                     ''
                     :
                     <Grid2
                         width={'100%'}
-                        padding={2}
+                        paddingX={2}
                         textAlign={'right'}
                     >
                         <Button onClick={doDelete} style={{textTransform : 'none'}}>Delete</Button>
                     </Grid2>
                 }
-            </BasicMobileLayout>
-        </Page>
+            </Box>
+        </Modal>
     )
-
 }

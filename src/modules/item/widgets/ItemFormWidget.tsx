@@ -1,11 +1,55 @@
-import { Box, FormControl, IconButton, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { Box, FormControl, IconButton, MenuItem, Select, SelectChangeEvent, Stack, TextField, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
 import { color_light_grey, color_white_grey } from "../../../utils/style/hmstyle";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Item, ItemClassType, ItemType } from "../ItemType";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-export default function ItemFormWidget(){
+export default function ItemFormWidget({
+    initItem,
+    onChange
+}:{
+    initItem : Item,
+    onChange : Function
+}){
+    const [formItem, setFormItem] = useState(initItem);
+
+    useEffect(()=>{
+        onChange(formItem);
+    },[formItem])
+    
+    function onChangeName(e:ChangeEvent<HTMLInputElement>){
+        const newItem = {...formItem};
+        newItem.name = e.currentTarget.value;
+        setFormItem(newItem);
+    }
+    function onChangeClassType(e:SelectChangeEvent){
+        const newItem = {...formItem};
+        newItem.classType = e.target.value  as ItemClassType
+        setFormItem(newItem);
+    }
+    function onChangeType(e:SelectChangeEvent){
+        const newItem = {...formItem};
+        newItem.type = e.target.value as ItemType
+        setFormItem(newItem);
+    }
+    function onChangeCount(e:ChangeEvent<HTMLInputElement>){
+        const newItem = {...formItem};
+        if(e.currentTarget.value === ""){
+            newItem.count = 0
+        } else {
+            newItem.count = parseInt(e.currentTarget.value);
+        }
+        setFormItem(newItem);
+    }
+    function countPlus(count : number){
+        const newItem = {...formItem};
+        newItem.count += count;
+        setFormItem(newItem);
+    }
+
     return(
         <Grid2>
             <Grid2
@@ -31,15 +75,18 @@ export default function ItemFormWidget(){
                         hiddenLabel
                         size="medium"
                         InputProps={{style:{fontSize:'1.5rem'}}}
+                        value={formItem.name}
+                        onChange={onChangeName}
                     />
                 </FormControl>
                 <Select variant="standard"
                     placeholder="Class Type"
                     displayEmpty
-                    defaultValue={""}
                     autoWidth
                     size="small"
                     style={{marginTop:'0.5rem'}}
+                    value={formItem.classType as string}
+                    onChange={onChangeClassType}
                 >
                     <MenuItem dense value="">
                         Class Type
@@ -64,6 +111,8 @@ export default function ItemFormWidget(){
                     defaultValue={""}
                     size="small"
                     style={{marginTop:'0.5rem'}}
+                    value={formItem.type}
+                    onChange={onChangeType}
                 >
                     <MenuItem dense value="">
                         Type
@@ -71,7 +120,7 @@ export default function ItemFormWidget(){
                     <MenuItem dense value="CONSUMABLES">
                         소모품
                     </MenuItem>
-                    <MenuItem dense value="PERMENANT">
+                    <MenuItem dense value="PERMANENT">
                         반영구/영구
                     </MenuItem>
                 </Select>
@@ -83,9 +132,23 @@ export default function ItemFormWidget(){
                     justifyContent={'start'}
                     alignItems={'center'}
                 >
-                    <IconButton><RemoveCircleIcon sx={{color:color_light_grey}}/></IconButton>
-                    <Typography>1</Typography>
-                    <IconButton><AddCircleIcon color="primary" /></IconButton>
+                    <IconButton
+                        onClick={()=>{countPlus(-1)}}
+                    ><RemoveCircleIcon sx={{color:color_light_grey}}/></IconButton>
+                    <TextField 
+                        style={{width:'3rem'}} 
+                        inputProps={{style:{textAlign:'center'}}} 
+                        size="small" 
+                        hiddenLabel 
+                        InputProps={{disableUnderline : true}} 
+                        variant="standard" 
+                        type="number"
+                        value={formItem.count}    
+                        onChange={onChangeCount}
+                    />
+                    <IconButton
+                        onClick={()=>{countPlus(1)}}
+                    ><AddCircleIcon color="primary" /></IconButton>
                 </Grid2>
             </Grid2>
         </Grid2>

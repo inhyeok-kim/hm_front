@@ -4,9 +4,8 @@ const baseURL = import.meta.env.VITE_DEFAULT_API_SERVER+"/user";
 
 export const userDatas = [
     {
-        id : 1,
-        uid : "test",
-        name : '테스터',
+        id : "test1",
+        name : '테스터1',
         familyId : 1
     }
 ]

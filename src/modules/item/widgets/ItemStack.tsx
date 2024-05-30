@@ -3,13 +3,19 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
 import { useRouter } from "../../../pages/AppRouter";
 import ItemDetailPage from "../../../pages/item/ItemDetailPage";
+import { useEffect } from "react";
+import { Item } from "../ItemType";
 
 export default function ItemStack({
     headerName
+    ,list
     ,onMore
+    ,onItemClick = ()=>{}
 }:{
     headerName : string
+    ,list : Item[]
     onMore : Function
+    onItemClick? : Function
 }){
     const router = useRouter();
 
@@ -36,59 +42,25 @@ export default function ItemStack({
                     whiteSpace={"nowrap"}
                     paddingLeft={2}
                 >
-                    <Grid2
-                        display={'inline-block'}
-                        width={'6rem'}
-                        marginRight={2}
-                        onClick={()=>{router.pushPage(<ItemDetailPage />)}}
-                    >
-                        <Box
-                            width={'6rem'}
-                            height={'6rem'}
-                            bgcolor={grey[300]}
-                            borderRadius={2}
-                        ></Box>
-                        <Typography variant="subtitle2">Item #1 name</Typography>
-                    </Grid2>
-                    <Grid2
-                        display={'inline-block'}
-                        width={'6rem'}
-                        marginRight={2}
-                    >
-                        <Box
-                            width={'6rem'}
-                            height={'6rem'}
-                            bgcolor={grey[300]}
-                            borderRadius={2}
-                        ></Box>
-                        <Typography variant="subtitle2">Item #1 name</Typography>
-                    </Grid2>
-                    <Grid2
-                        display={'inline-block'}
-                        width={'6rem'}
-                        marginRight={2}
-                    >
-                        <Box
-                            width={'6rem'}
-                            height={'6rem'}
-                            bgcolor={grey[300]}
-                            borderRadius={2}
-                        ></Box>
-                        <Typography variant="subtitle2">Item #1 name</Typography>
-                    </Grid2>
-                    <Grid2
-                        display={'inline-block'}
-                        width={'6rem'}
-                        marginRight={2}
-                    >
-                        <Box
-                            width={'6rem'}
-                            height={'6rem'}
-                            bgcolor={grey[300]}
-                            borderRadius={2}
-                        ></Box>
-                        <Typography variant="subtitle2">Item #1 name</Typography>
-                    </Grid2>
+                    {
+                        list.map((item)=>(
+                            <Grid2
+                                key={item.id}
+                                display={'inline-block'}
+                                width={'6rem'}
+                                marginRight={2}
+                                onClick={()=>{onItemClick(item.id)}}
+                            >
+                                <Box
+                                    width={'6rem'}
+                                    height={'6rem'}
+                                    bgcolor={grey[300]}
+                                    borderRadius={2}
+                                ></Box>
+                                <Typography variant="subtitle2">{item.name!}</Typography>
+                            </Grid2>
+                        ))
+                    }
                 </Grid2>
             </Grid2>
         </Grid2>

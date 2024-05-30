@@ -2,7 +2,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useDevice } from "../../utils/hooks/DeviceHooks";
 import ItemStack from "../../modules/item/widgets/ItemStack";
 import ItemSearchBar from "../../modules/item/widgets/ItemSearchBar";
-import { Box, Button, Divider, IconButton, Modal, Typography } from "@mui/material";
+import { IconButton } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ItemListPage from "./ItemListPage";
 import { useState } from "react";
@@ -11,11 +11,12 @@ import { useRouter } from "../AppRouter";
 import ItemDetailPage from "./ItemDetailPage";
 import Page from "../Page";
 import BasicTabletLayout from "../../layout/BasicTabletLayout";
-import ItemList from "../../modules/item/widgets/ItemList";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { color_green } from "../../utils/style/hmstyle";
-import ItemFormWidget from "../../modules/item/widgets/ItemFormWidget";
-import CloseIcon from '@mui/icons-material/Close';
+import { ItemClassType } from "../../modules/item/ItemType";
+import { useQuery } from "@tanstack/react-query";
+import ItemListForTablet from "../../modules/item/widgets/ItemListForTablet";
+import ItemDetailModal from "../../modules/item/widgets/ItemDetailModal";
+import itemAPI from "../../modules/item/api/ItemApi";
 
 export default function ItemPage(){
     const {isMobile} = useDevice();
@@ -29,12 +30,32 @@ export default function ItemPage(){
                 <ItemPageForTablet/>
             }
         </>
-        )    
+    )    
 }
 
 function ItemPageForMobile(){
     const [open, setOpen] = useState(false);
     const router = useRouter();
+    const foodList = useQuery({
+        queryKey : ['item',ItemClassType.food]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.food)
+        ,select : response=>response.data.data.content
+    })
+    const consumeList = useQuery({
+        queryKey : ['item',ItemClassType.consumables]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.consumables)
+        ,select : response=>response.data.data.content
+    })
+    const furnitureList = useQuery({
+        queryKey : ['item',ItemClassType.furniture]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.furniture)
+        ,select : response=>response.data.data.content
+    })
+    const livingList = useQuery({
+        queryKey : ['item',ItemClassType.living]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.living)
+        ,select : response=>response.data.data.content
+    })
 
     return (
         <Page>
@@ -70,7 +91,7 @@ function ItemPageForMobile(){
                             textAlign={'right'}
                         >
                             <IconButton
-                                onClick={()=>{router.pushPage(<ItemDetailPage isNew />)}}
+                                onClick={()=>{router.pushPage(<ItemDetailPage isNew id={0} />)}}
                             >
                                 <AddIcon
                                     color="primary"
@@ -84,10 +105,26 @@ function ItemPageForMobile(){
                         height={'calc(100% - 80px)'}
                         sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                     >
-                        <ItemStack headerName="Food" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
-                        <ItemStack headerName="Consumables" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
-                        <ItemStack headerName="Furniture" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
-                        <ItemStack headerName="Living" onMore={()=>{router.pushPage(<ItemListPage/>)}} />
+                        {
+                            foodList.data && foodList.data.length > 0?
+                            <ItemStack onItemClick={(id:number)=>{router.pushPage(<ItemDetailPage id={id} />)}} list={foodList.data} headerName="Food" onMore={()=>{router.pushPage(<ItemListPage itemClassType={ItemClassType.food}/>)}} />
+                            :''
+                        }
+                        {
+                            consumeList.data && consumeList.data.length > 0?
+                            <ItemStack onItemClick={(id:number)=>{router.pushPage(<ItemDetailPage id={id} />)}} list={consumeList.data} headerName="Consumables" onMore={()=>{router.pushPage(<ItemListPage itemClassType={ItemClassType.consumables}/>)}} />
+                            :''
+                        }
+                        {
+                            furnitureList.data && furnitureList.data.length > 0?
+                            <ItemStack onItemClick={(id:number)=>{router.pushPage(<ItemDetailPage id={id} />)}} list={furnitureList.data} headerName="Furniture" onMore={()=>{router.pushPage(<ItemListPage itemClassType={ItemClassType.furniture}/>)}} />
+                            :''
+                        }
+                        {
+                            livingList.data && livingList.data.length > 0?
+                            <ItemStack onItemClick={(id:number)=>{router.pushPage(<ItemDetailPage id={id} />)}} list={livingList.data} headerName="Living" onMore={()=>{router.pushPage(<ItemListPage itemClassType={ItemClassType.living}/>)}} />
+                            :''
+                        }
                     </Grid2>
                 </Grid2>
             </BasicMobileLayout>
@@ -97,6 +134,39 @@ function ItemPageForMobile(){
 
 function ItemPageForTablet(){
     const [sideOpen, setSideOpen] = useState(false);
+    const [selectedItemClassType, setSelectedItemClassType] = useState<ItemClassType>();
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedItemId, setSelectedItemId] = useState(0);
+    function selectItemClassType(itemClassType : ItemClassType){
+        setSideOpen(true);
+        setSelectedItemClassType(itemClassType);
+    }
+    function openModal(id : number){
+        setSelectedItemId(id);
+        setModalOpen(true);
+    }
+
+
+    const foodList = useQuery({
+        queryKey : ['item',ItemClassType.food]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.food)
+        ,select : response=>response.data.data.content
+    })
+    const consumeList = useQuery({
+        queryKey : ['item',ItemClassType.consumables]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.consumables)
+        ,select : response=>response.data.data.content
+    })
+    const furnitureList = useQuery({
+        queryKey : ['item',ItemClassType.furniture]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.furniture)
+        ,select : response=>response.data.data.content
+    })
+    const livingList = useQuery({
+        queryKey : ['item',ItemClassType.living]
+        ,queryFn : ()=>itemAPI.getItemList(ItemClassType.living)
+        ,select : response=>response.data.data.content
+    })
 
 
     return (
@@ -130,7 +200,9 @@ function ItemPageForTablet(){
                             <Grid2
                                 paddingX={2}
                             >
-                                <IconButton>
+                                <IconButton
+                                    onClick={()=>{openModal(0)}}
+                                >
                                     <AddIcon
                                         color="primary"
                                     />
@@ -142,10 +214,26 @@ function ItemPageForTablet(){
                             overflow={'scroll'}
                             sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                         >
-                            <ItemStack headerName="Food" onMore={()=>{setSideOpen(true)}} />
-                            <ItemStack headerName="Consumables" onMore={()=>{}} />
-                            <ItemStack headerName="Furniture" onMore={()=>{}} />
-                            <ItemStack headerName="Living" onMore={()=>{}} />
+                            {
+                                foodList.data && foodList.data.length > 0?
+                                <ItemStack onItemClick={(id:number)=>{openModal(id)}}  list={foodList.data} headerName="Food" onMore={()=>{selectItemClassType(ItemClassType.food)}} />
+                                :''
+                            }
+                            {
+                                consumeList.data && consumeList.data.length > 0?
+                                <ItemStack onItemClick={(id:number)=>{openModal(id)}} list={consumeList.data} headerName="Consumables" onMore={()=>{selectItemClassType(ItemClassType.consumables)}} />
+                                :''
+                            }
+                            {
+                                furnitureList.data && furnitureList.data.length > 0?
+                                <ItemStack onItemClick={(id:number)=>{openModal(id)}} list={furnitureList.data} headerName="Furniture"onMore={()=>{selectItemClassType(ItemClassType.furniture)}} />
+                                :''
+                            }
+                            {
+                                livingList.data && livingList.data.length > 0?
+                                <ItemStack onItemClick={(id:number)=>{openModal(id)}} list={livingList.data} headerName="Living" onMore={()=>{selectItemClassType(ItemClassType.living)}} />
+                                :''
+                            }
                         </Grid2>
                     </Grid2>
                     <Grid2
@@ -154,167 +242,16 @@ function ItemPageForTablet(){
                         height={'100%'}
                         borderLeft={sideOpen ? '1px solid ' + color_green : ''}
                     >  
-                        <ItemListForTablet onClose={()=>{setSideOpen(false)}} />
+                        {
+                            selectedItemClassType ? 
+                            <ItemListForTablet itemClassType={selectedItemClassType} onClose={()=>{setSideOpen(false)}} />
+                            :
+                            ''
+                        }
                     </Grid2>
                 </Grid2>
+                <ItemDetailModal isNew={selectedItemId === 0} id={selectedItemId} open={modalOpen} onClose={()=>{setModalOpen(false)}}/>
             </BasicTabletLayout>
         </Page>
-    )
-}
-
-function ItemListForTablet({
-    onClose
-}:{
-    onClose : Function
-}){
-    const [modalOpen, setModalOpen] = useState(false);
-
-    return (
-        <Grid2
-            minWidth={'350px'}
-            width={'22rem'}
-            height={'100%'}
-            paddingX={2}
-        >
-            <Grid2
-                paddingTop={2}
-                height={60}
-                container
-                paddingBottom={0}
-                justifyContent={'space-between'}
-                bgcolor={'white'}
-            >
-                <Grid2
-                    width={'20%'}
-                    textAlign={'left'}
-                >
-                    <IconButton
-                        onClick={()=>{onClose()}}
-                    >
-                        <ArrowForwardIosIcon
-                            fontSize="small"
-                            color="primary"
-                        />
-                    </IconButton>
-                </Grid2>
-                <Grid2
-                    width={'50%'}
-                >
-                    <ItemSearchBar />
-                </Grid2>
-                <Grid2
-                    width={'20%'}
-                    textAlign={'right'}
-                >
-                    <IconButton
-                        onClick={()=>{setModalOpen(true)}}
-                    >
-                        <AddIcon
-                            color="primary"
-                        />
-                    </IconButton>
-                </Grid2>
-            </Grid2>
-            <Grid2
-                height={'calc(100% - 60px)'}
-            >
-                <Typography 
-                    bgcolor={'white'}
-                    padding={2} 
-                    zIndex={1}
-                    fontWeight={"500"} variant="h5">Food</Typography>
-                <Grid2
-                    overflow={'scroll'}
-                    height={'calc(100% - 64px)'}
-                    sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
-                >
-                    <ItemList />
-                </Grid2>
-            </Grid2>
-            <ItemDetailModal  open={modalOpen} onClose={()=>{setModalOpen(false)}}/>
-        </Grid2>
-    )
-}
-
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '30vw',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 2,
-    borderRadius : '8px'
-  };
-
-function ItemDetailModal({
-    open
-    ,onClose
-    ,isNew
-}:{
-    open : boolean
-    onClose : Function
-    isNew? : boolean
-}){
-
-    return (
-        <Modal
-            open={open}
-            onClose={()=>{onClose}}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box
-                sx={style}
-            >
-                <Grid2
-                    width={'100%'}
-                    container
-                    justifyContent={'space-between'}
-                    bgcolor={'white'}
-                >
-                    <Grid2
-                        width={'20%'}
-                        textAlign={'left'}
-                    >
-                        <IconButton
-                            onClick={()=>{onClose()}}
-                        >
-                            <CloseIcon
-                                fontSize="small"
-                                color="primary"
-                            />
-                        </IconButton>
-                    </Grid2>
-                    <Grid2
-                        width={'50%'}
-                    >
-                        {/* <ItemSearchBar /> */}
-                    </Grid2>
-                    <Grid2
-                        width={'20%'}
-                        textAlign={'right'}
-                    >
-                        <Button style={{textTransform : 'none'}}>Save</Button>
-                    </Grid2>
-                </Grid2>
-                <Grid2>
-                    <ItemFormWidget />
-                </Grid2>
-                {   isNew?
-                    ''
-                    :
-                    <Grid2
-                        width={'100%'}
-                        paddingX={2}
-                        textAlign={'right'}
-                    >
-                        <Button style={{textTransform : 'none'}}>Delete</Button>
-                    </Grid2>
-                }
-            </Box>
-        </Modal>
     )
 }

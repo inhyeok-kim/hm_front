@@ -1,9 +1,8 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import SignFormWidget from "../../modules/sign/widgets/SignFormWidget";
 import { Button, Typography } from "@mui/material";
-import LoginFormWidget from "../../modules/login/widgets/LoginFormWidget";
 import { useDevice } from "../../utils/hooks/DeviceHooks";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 export default function SignPage(){
     const {isMobile} = useDevice();

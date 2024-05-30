@@ -28,7 +28,7 @@ export default function LoginFormWidget(){
                     InputProps={{disableUnderline : true, style:{borderRadius : '8px'}}}
                     
                     size="small" 
-                    label='Email' 
+                    label='ID' 
                     variant="filled" 
                     value={id} 
                     onChange={(e)=>{setId(e.currentTarget.value)}} 
@@ -55,7 +55,7 @@ export default function LoginFormWidget(){
                         onLoginFail={onLoginFail} 
                         onLoginSuccess={onLoginSuccess}
                      />
-                    <Link to={'/sign'}>
+                    <Link to={'/sign'} replace>
                         <Typography textAlign={'center'} color={color_green}>
                             Forgot your password?
                         </Typography>
