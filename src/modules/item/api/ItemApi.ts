@@ -22,7 +22,7 @@ const itemAPI = {
             params : {
                 classType : itemClassType,
                 page : page ? page : 0,
-                pageSize : pageSize ? pageSize : 10
+                size : pageSize ? pageSize : 10
             }
         });
     },
