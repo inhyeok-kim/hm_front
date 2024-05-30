@@ -9,6 +9,7 @@ import UserState from "../atom/UserState";
 import { useEffect, useState } from "react";
 import { getMe } from "../modules/user/api/UserApi";
 import { useNavigate } from "react-router-dom";
+import SettingPage from "./setting/SettingPage";
 
 export default function Root(){
     const [ready, setReady] = useState(false);
@@ -40,7 +41,7 @@ export default function Root(){
                         [<ItemPage/>],
                         [<HomePage/>],
                         [<HomePage/>],
-                        [<HomePage/>]
+                        [<SettingPage/>]
                     ]}
                     initMenu="home"
                 >

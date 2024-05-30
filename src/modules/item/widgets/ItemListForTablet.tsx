@@ -92,7 +92,7 @@ export default function ItemListForTablet({
                     <ItemList onItemClick={(id:number)=>{openModal(id)}} list={itemList.data} />
                 </Grid2>
             </Grid2>
-            <ItemDetailModal isNew={selectedItemId === 0} id={selectedItemId}  open={modalOpen} onClose={()=>{setModalOpen(false)}}/>
+            <ItemDetailModal isNew={selectedItemId === 0} classType={itemClassType} id={selectedItemId}  open={modalOpen} onClose={()=>{setModalOpen(false)}}/>
         </Grid2>
     )
 }

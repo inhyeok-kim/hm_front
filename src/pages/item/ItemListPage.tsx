@@ -1,11 +1,11 @@
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import ItemSearchBar from "../../modules/item/widgets/ItemSearchBar";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, MenuItem, Select, Typography } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ItemList from "../../modules/item/widgets/ItemList";
 import Page, { PageRef } from "../Page";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "../AppRouter";
 import ItemDetailPage from "./ItemDetailPage";
 import BasicMobileLayout from "../../layout/BasicMobileLayout";
@@ -21,19 +21,26 @@ export default function ItemListPage({
     const pageRef = useRef<PageRef>();
     const router = useRouter();
 
+    const [order,setOrder] = useState("modifiedAt,desc");
+
     const itemList = useQuery({
         queryKey : ['item',itemClassType]
-        ,queryFn : ()=>itemAPI.getItemList(itemClassType)
+        ,queryFn : ()=>itemAPI.getItemList(itemClassType,0,20,order)
         ,select : response=>response.data.data.content
     })
+
+    useEffect(()=>{
+        itemList.refetch();
+    },[order]);
 
     return (
         <Page ref={pageRef} isSlide>
             <BasicMobileLayout>
                 <Grid2
                     width={'100%'}
-                    padding={2}
-                    height={80}
+                    paddingX={2}
+                    paddingTop={2}
+                    height={60}
                     container
                     justifyContent={'space-between'}
                     bgcolor={'white'}
@@ -61,7 +68,7 @@ export default function ItemListPage({
                         textAlign={'right'}
                     >
                         <IconButton
-                            onClick={()=>{router.pushPage(<ItemDetailPage isNew id={0} />)}}
+                            onClick={()=>{router.pushPage(<ItemDetailPage isNew classType={itemClassType} id={0} />)}}
                         >
                             <AddIcon
                                 color="primary"
@@ -72,18 +79,44 @@ export default function ItemListPage({
                 <Grid2
                     paddingBottom={5}
                     overflow={'scroll'}
-                    height={'calc(100% - 80px)'}
+                    height={'calc(100% - 60px)'}
                     sx={{scrollbarWidth:'none','&::-webkit-scrollbar' : { display:'none'}}}
                 >
-                    <Typography 
+                    <Grid2
                         position={'absolute'}
                         bgcolor={'white'}
                         width={'100%'}
                         padding={2} 
                         zIndex={1}
-                        fontWeight={"500"} variant="h5">{itemClassType}</Typography>
+                    >
+                        <Typography 
+                            width={'100%'}
+                            fontWeight={"500"} variant="h5">{itemClassType}
+                        </Typography>
+
+                        <Grid2
+                            container
+                            justifyContent={'end'}
+                            paddingX={2}
+                        >
+                            <Select
+                                value={order}
+                                onChange={(e)=>{setOrder(e.target.value)}}
+                                label={'age'}
+                                size="small"
+                                style={{fontSize : '0.8rem'}}
+                                displayEmpty
+                                variant="standard"
+                            >
+                                <MenuItem dense value={"modifiedAt,desc"}>최신순</MenuItem>
+                                <MenuItem dense value={"count,desc"}>많은순</MenuItem>
+                                <MenuItem dense value={"count,asc"}>적은순</MenuItem>
+                            </Select>
+                        </Grid2>
+
+                    </Grid2>
                     <Grid2
-                        marginTop={'4rem'}
+                        marginTop={'5.5rem'}
                     >
                         {
                             itemList.isSuccess ? 

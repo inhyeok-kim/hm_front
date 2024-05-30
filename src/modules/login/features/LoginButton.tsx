@@ -1,8 +1,9 @@
 import { Button } from "@mui/material";
-import {login} from "../api/LoginApi";
+import LoginAPI from "../api/LoginApi";
 interface Props {
     id : string
     password : string
+    remember? : boolean
     onLoginSuccess : Function
     onLoginFail : Function
 }
@@ -10,7 +11,7 @@ interface Props {
 export default function LoginButton(props : Props){
 
     async function onClickHandler(){
-        const result = await login(props.id, props.password);
+        const result = await LoginAPI.login(props.id, props.password,props.remember);
         if(result.code === 0){
             props.onLoginSuccess();
         } else {

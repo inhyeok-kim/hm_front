@@ -63,6 +63,7 @@ function ItemListItem({
                 <Box
                     width={'3rem'}
                     height={'3rem'}
+                    sx={{backgroundImage : item.thumbnail ? 'url("'+item.thumbnail+'")' : '',backgroundSize : 'cover'}}
                     bgcolor={grey[300]}
                     borderRadius={2}
                 ></Box>

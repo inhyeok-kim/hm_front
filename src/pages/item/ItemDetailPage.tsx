@@ -11,16 +11,18 @@ import itemAPI from "../../modules/item/api/ItemApi";
 
 export default function ItemDetailPage({
     isNew,
-    id = 0
+    id = 0,
+    classType = ItemClassType.consumables
 }:{
     isNew? : boolean
     id? : number
+    classType? : ItemClassType
 }){
     const pageRef = useRef<PageRef>();
 
     const [editItem, setEditItem] = useState<Item>({
         id : 0,
-        classType : "CONSUMABLES",
+        classType : classType,
         count : 0,
         name : '',
         type : "CONSUMABLES"
@@ -106,7 +108,7 @@ export default function ItemDetailPage({
                             <ItemFormWidget 
                                 initItem={{
                                     id : 0,
-                                    classType : "CONSUMABLES",
+                                    classType : classType,
                                     count : 0,
                                     name : '',
                                     type : "CONSUMABLES"

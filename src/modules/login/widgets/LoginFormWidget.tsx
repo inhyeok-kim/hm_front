@@ -1,12 +1,14 @@
-import { FormControl, Stack, TextField, Typography } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, Stack, TextField, Typography } from "@mui/material";
 import LoginButton from "../features/LoginButton";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { color_green } from "../../../utils/style/hmstyle";
+import { CheckBox } from "@mui/icons-material";
 
 export default function LoginFormWidget(){
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
+    const [remember, setRemember] = useState(false);
     const [loginFailed, setLoginFailed] = useState(false);
 
     const navigate = useNavigate();
@@ -47,11 +49,13 @@ export default function LoginFormWidget(){
                     :''
                 }
             </FormControl>
+            <FormControlLabel control={<Checkbox checked={remember} onChange={()=>{setRemember(curr=>!curr)}}  size="small"  />} slotProps={{typography : {fontSize:'0.9rem'}}} label="Remember me" />
             <FormControl margin="normal" fullWidth>
                 <Stack spacing={2}>
                     <LoginButton 
                         id={id} 
                         password={password} 
+                        remember={remember}
                         onLoginFail={onLoginFail} 
                         onLoginSuccess={onLoginSuccess}
                      />
