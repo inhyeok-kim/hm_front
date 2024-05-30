@@ -16,13 +16,14 @@ const itemAPI = {
     ,updateItem(item : Item){
         return itemAxios.put("",{...item});
     },
-    getItemList(itemClassType : ItemClassType, page? : number, pageSize? : number){
+    getItemList(itemClassType : ItemClassType, page? : number, pageSize? : number, sort? : string){
         const path = "/list";
         return itemAxios.get(path,{
             params : {
                 classType : itemClassType,
                 page : page ? page : 0,
-                pageSize : pageSize ? pageSize : 10
+                size : pageSize ? pageSize : 10,
+                sort : sort
             }
         });
     },
@@ -34,6 +35,9 @@ const itemAPI = {
     }
     ,deleteItem(id : number){
         return itemAxios.delete("/"+id);
+    }
+    ,searchItem(keyword : string){
+        return itemAxios.get('/search?keyword='+keyword);
     }
 
 }

@@ -1,10 +1,10 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material"
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2"
-import FolderIcon from '@mui/icons-material/Folder';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { useState } from "react";
+import SettingsIcon from '@mui/icons-material/Settings';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import HomeIcon from '@mui/icons-material/Home';
 import { useRouter } from "../pages/AppRouter";
 
 export default function BottomNav({
@@ -32,31 +32,31 @@ export default function BottomNav({
                 <BottomNavigationAction
                     label="Home"
                     value="home"
-                    icon={<RestoreIcon />}
+                    icon={<HomeIcon />}
                     onClick={()=>{router.goStack(0,'home')}}
                 />
                 <BottomNavigationAction
                     label="Item"
                     value="item"
-                    icon={<FavoriteIcon />}
+                    icon={<InventoryIcon />}
                     onClick={()=>{router.goStack(1,'item')}}
                 />
                 <BottomNavigationAction
                     label="Recipe"
                     value="recipe"
-                    icon={<LocationOnIcon />}
+                    icon={<MenuBookIcon />}
                     onClick={()=>{router.goStack(2,'recipe')}}
                 />
                 <BottomNavigationAction 
                     label="Menu" 
                     value="menu" 
-                    icon={<FolderIcon />} 
+                    icon={<LocalDiningIcon />} 
                     onClick={()=>{router.goStack(3,'menu')}}
                 />
                 <BottomNavigationAction 
                     label="Setting" 
                     value="setting" 
-                    icon={<FolderIcon />} 
+                    icon={<SettingsIcon />} 
                     onClick={()=>{router.goStack(4,'setting')}}
                 />
             </BottomNavigation>

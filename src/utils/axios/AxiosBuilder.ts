@@ -6,7 +6,6 @@ function getAxiosInstance(config?: CreateAxiosDefaults<any> | undefined){
     axiosInstance.interceptors.response.use((response)=>{
         if(response.data.code === -100){
             if(!location.pathname.startsWith('/login')){
-                alert("로그인이 필요합니다.");
                 location.href="/login";
             }
         }
@@ -14,7 +13,6 @@ function getAxiosInstance(config?: CreateAxiosDefaults<any> | undefined){
     }, (error)=>{
         if(error.response.data.code === -100){
             if(!location.pathname.startsWith('/login')){
-                alert("로그인이 필요합니다.");
                 location.href="/login";
             }
         }

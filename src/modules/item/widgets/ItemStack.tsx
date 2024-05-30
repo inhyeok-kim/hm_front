@@ -49,11 +49,13 @@ export default function ItemStack({
                                 display={'inline-block'}
                                 width={'6rem'}
                                 marginRight={2}
+                                
                                 onClick={()=>{onItemClick(item.id)}}
                             >
                                 <Box
                                     width={'6rem'}
                                     height={'6rem'}
+                                    sx={{backgroundImage : item.thumbnail ? 'url("'+item.thumbnail+'")' : '',backgroundSize : 'cover'}}
                                     bgcolor={grey[300]}
                                     borderRadius={2}
                                 ></Box>

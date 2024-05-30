@@ -4,7 +4,7 @@ import ItemFormWidget from "./ItemFormWidget";
 import CloseIcon from '@mui/icons-material/Close';
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Item } from "../ItemType";
+import { Item, ItemClassType } from "../ItemType";
 import itemAPI from "../api/ItemApi";
 
 const style = {
@@ -24,15 +24,17 @@ export default function ItemDetailModal({
     ,onClose
     ,isNew
     ,id = 0
+    ,classType = ItemClassType.consumables
 }:{
     open : boolean
     onClose : Function
     isNew? : boolean
     id? : number
+    classType? : ItemClassType
 }){
     const [editItem, setEditItem] = useState<Item>({
         id : 0,
-        classType : "CONSUMABLES",
+        classType : classType,
         count : 0,
         name : '',
         type : "CONSUMABLES"
@@ -127,7 +129,7 @@ export default function ItemDetailModal({
                         <ItemFormWidget 
                             initItem={{
                                 id : 0,
-                                classType : "CONSUMABLES",
+                                classType : classType,
                                 count : 0,
                                 name : '',
                                 type : "CONSUMABLES"

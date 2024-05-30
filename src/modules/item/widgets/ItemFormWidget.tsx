@@ -5,7 +5,8 @@ import { color_light_grey, color_white_grey } from "../../../utils/style/hmstyle
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Item, ItemClassType, ItemType } from "../ItemType";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import ImageUtils from "../../../utils/com/ImageUtils";
 
 export default function ItemFormWidget({
     initItem,
@@ -15,6 +16,8 @@ export default function ItemFormWidget({
     onChange : Function
 }){
     const [formItem, setFormItem] = useState(initItem);
+    const [imageSrc, setImageSrc] = useState('');
+    const imgInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(()=>{
         onChange(formItem);
@@ -50,17 +53,40 @@ export default function ItemFormWidget({
         setFormItem(newItem);
     }
 
+    function selectImage(e : ChangeEvent<HTMLInputElement>){
+        const files = e.target.files;
+        if(files && files.length > 0){
+            ImageUtils.resizeImageFile(files[0],200,(dataUrl : string)=>{
+                const newItem = {...formItem};
+                newItem.thumbnail = dataUrl;
+                setFormItem(newItem);
+            });
+        }
+    }
+
     return(
         <Grid2>
             <Grid2
                 container
                 justifyContent={'center'}
             >
+                <Grid2
+                    display={'none'}
+                >
+                    <input ref={imgInputRef} onChange={selectImage} type="file" accept="image/*" />
+
+                </Grid2>
                 <Box
                     width={'6rem'}
                     height={'6rem'}
+                    sx={{backgroundImage : formItem.thumbnail ? 'url("'+formItem.thumbnail+'")' : '',backgroundSize : 'cover'}}
                     bgcolor={grey[300]}
                     borderRadius={2}
+                    onClick={()=>{
+                        if(imgInputRef.current){
+                            imgInputRef.current.click();
+                        }
+                    }}
                 ></Box>
             </Grid2>
             <Grid2

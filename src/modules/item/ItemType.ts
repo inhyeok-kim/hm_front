@@ -16,4 +16,5 @@ export interface Item {
     count : number
     type : ItemType
     classType : ItemClassType
+    thumbnail? : string
 }

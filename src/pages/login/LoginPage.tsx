@@ -3,10 +3,22 @@ import LoginFormWidget from "../../modules/login/widgets/LoginFormWidget";
 import { Button, Typography } from "@mui/material";
 import { useDevice } from "../../utils/hooks/DeviceHooks";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import LoginAPI from "../../modules/login/api/LoginApi";
 
 export default function LoginPage(){
     const {isMobile} = useDevice();
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        // const cookies = document.cookie;
+        // console.log(cookies);
+        LoginAPI.loginRemember().then((data)=>{
+            if(data.code === 0){
+                navigate('/',{replace : true});
+            }
+        })
+    },[]);
 
     return (
         <Grid2
