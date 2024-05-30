@@ -36,6 +36,9 @@ const itemAPI = {
     ,deleteItem(id : number){
         return itemAxios.delete("/"+id);
     }
+    ,searchItem(keyword : string){
+        return itemAxios.get('/search?keyword='+keyword);
+    }
 
 }
 export default itemAPI
