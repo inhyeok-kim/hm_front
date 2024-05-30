@@ -5,7 +5,7 @@ import { color_light_grey, color_white_grey } from "../../../utils/style/hmstyle
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Item, ItemClassType, ItemType } from "../ItemType";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import ImageUtils from "../../../utils/com/ImageUtils";
 
 export default function ItemFormWidget({
@@ -16,7 +16,6 @@ export default function ItemFormWidget({
     onChange : Function
 }){
     const [formItem, setFormItem] = useState(initItem);
-    const [imageSrc, setImageSrc] = useState('');
     const imgInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(()=>{
