@@ -37,7 +37,11 @@ const itemAPI = {
         return itemAxios.delete("/"+id);
     }
     ,searchItem(keyword : string){
-        return itemAxios.get('/search?keyword='+keyword);
+        return itemAxios.get('/search',{
+            params : {
+                keyword : keyword
+            }
+        });
     }
 
 }
