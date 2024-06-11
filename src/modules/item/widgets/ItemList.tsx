@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { grey } from "@mui/material/colors";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
@@ -7,7 +7,6 @@ import { color_light_grey, color_white_grey } from "../../../utils/style/hmstyle
 import { Item } from "../ItemType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import itemAPI from "../api/ItemApi";
-import { useState } from "react";
 
 export default function ItemList({
     list

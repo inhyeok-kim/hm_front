@@ -26,7 +26,7 @@ export default function ItemListPage({
     const itemList = useQuery({
         queryKey : ['item',itemClassType]
         ,queryFn : ()=>itemAPI.getItemList(itemClassType,0,20,order)
-        ,select : response=>response.data.data.content
+        ,select : response=>response.data.data
     })
 
     useEffect(()=>{

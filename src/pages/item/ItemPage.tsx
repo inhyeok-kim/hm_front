@@ -39,22 +39,22 @@ function ItemPageForMobile(){
     const foodList = useQuery({
         queryKey : ['item',ItemClassType.food,'summary']
         ,queryFn : ()=>itemAPI.getItemList(ItemClassType.food,0,10,'modifiedAt,desc')
-        ,select : response=>response.data.data.content
+        ,select : response=>response.data.data
     })
     const consumeList = useQuery({
         queryKey : ['item',ItemClassType.consumables,'summary']
         ,queryFn : ()=>itemAPI.getItemList(ItemClassType.consumables,0,10,'modifiedAt,desc')
-        ,select : response=>response.data.data.content
+        ,select : response=>response.data.data
     })
     const furnitureList = useQuery({
         queryKey : ['item',ItemClassType.furniture,'summary']
         ,queryFn : ()=>itemAPI.getItemList(ItemClassType.furniture,0,10,'modifiedAt,desc')
-        ,select : response=>response.data.data.content
+        ,select : response=>response.data.data
     })
     const livingList = useQuery({
         queryKey : ['item',ItemClassType.living,'summary']
         ,queryFn : ()=>itemAPI.getItemList(ItemClassType.living,0,10,'modifiedAt,desc')
-        ,select : response=>response.data.data.content
+        ,select : response=>response.data.data
     })
 
     return (

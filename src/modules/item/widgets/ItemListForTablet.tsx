@@ -27,7 +27,7 @@ export default function ItemListForTablet({
     const itemList = useQuery({
         queryKey : ['item',itemClassType]
         ,queryFn : ()=>itemAPI.getItemList(itemClassType)
-        ,select : response=>response.data.data.content
+        ,select : response=>response.data.data
     })
 
     return (
